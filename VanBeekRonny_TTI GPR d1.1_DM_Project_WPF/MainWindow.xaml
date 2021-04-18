@@ -1,0 +1,42 @@
+﻿<Window x:Class="VanBeekRonny_TTI_GPR_d1._1_DM_Project_WPF.MainWindow"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal" 
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VanBeekRonny_TTI_GPR_d1._1_DM_Project_WPF"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Image x:Name="imgAfbeelding" Source="clapper-board-custom.png" Grid.Row="0" Grid.Column="0" Grid.RowSpan="8" Margin="25"/>
+        <Button x:Name="btnFilm" Content="Films" Grid.Row="0" Grid.Column="1" Margin="10" Click="btnFilm_Click"/>
+        <Button x:Name="btnBeroemdheden" Content="Beroemdheden" Grid.Row="1" Grid.Column="1" Margin="10"/>
+        <Button x:Name="btnGenres" Content="Genres" Grid.Row="2" Grid.Column="1" Margin="10"/>
+        <Button x:Name="btnTalen" Content="Talen" Grid.Row="3" Grid.Column="1" Margin="10"/>
+        <Button x:Name="btnLeeftijdsgroepen" Content="Leeftijdsgroepen" Grid.Row="4" Grid.Column="1" Margin="10"/>
+        <Button x:Name="btnNationaliteiten" Content="Nationaliteiten" Grid.Row="5" Grid.Column="1" Margin="10"/>
+        <Button x:Name="btnSterrenbeelden" Content="Sterrenbeelden" Grid.Row="6" Grid.Column="1" Margin="10"/>
+        <Button x:Name="btnAfsluiten" Content="Afsluiten" Grid.Row="7" Grid.Column="1" Margin="10 10 10 20" Click="btnAfsluiten_Click"/>
+    </Grid>
+</Window>
