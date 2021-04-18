@@ -121,6 +121,12 @@
   <ItemGroup>
     <Resource Include="clapper-board-custom.png" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\VanBeekRonny_TTI GPR d1.1_DM_Project_DAL\VanBeekRonny_TTI GPR d1.1_DM_Project_DAL.csproj">
+      <Project>{b9972d85-841d-4223-9f33-ef31637cc808}</Project>
+      <Name>VanBeekRonny_TTI GPR d1.1_DM_Project_DAL</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.4.0.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.4.0.0\build\MaterialDesignThemes.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
