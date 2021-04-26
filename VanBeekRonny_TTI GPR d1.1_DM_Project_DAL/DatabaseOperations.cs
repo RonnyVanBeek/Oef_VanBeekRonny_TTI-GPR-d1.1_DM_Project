@@ -16,5 +16,14 @@ namespace VanBeekRonny_TTI_GPR_d1._1_DM_Project_DAL
                 return query.ToList();
             }
         }
+
+        public static List<Beroemdheid> OphalenBeroemdheden()
+        {
+            using (IMDbFilmsEntities entities = new IMDbFilmsEntities())
+            {
+                var query = entities.Beroemdheid;
+                return query.ToList();
+            }
+        }
     }
 }

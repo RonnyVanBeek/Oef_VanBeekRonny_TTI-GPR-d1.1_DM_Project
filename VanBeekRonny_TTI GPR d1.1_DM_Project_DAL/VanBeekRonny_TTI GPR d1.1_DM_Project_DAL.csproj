@@ -87,6 +87,9 @@
     <Compile Include="Nationaliteit.cs">
       <DependentUpon>IMDbFilmsModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Partials\Leeftijdsgroep.cs" />
+    <Compile Include="Partials\Nationaliteit.cs" />
+    <Compile Include="Partials\Sterrenbeeld.cs" />
     <Compile Include="Partials\Taal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sterrenbeeld.cs">

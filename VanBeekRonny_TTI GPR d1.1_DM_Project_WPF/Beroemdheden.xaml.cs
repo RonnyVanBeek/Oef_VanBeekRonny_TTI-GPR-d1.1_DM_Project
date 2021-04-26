@@ -10,36 +10,29 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
+using VanBeekRonny_TTI_GPR_d1._1_DM_Project_DAL;
 
 namespace VanBeekRonny_TTI_GPR_d1._1_DM_Project_WPF
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for Beroemdheden.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class Beroemdheden : Window
     {
-        public MainWindow()
+        public Beroemdheden()
         {
             InitializeComponent();
         }
 
-        private void btnFilm_Click(object sender, RoutedEventArgs e)
-        {
-            Films films = new Films();
-            films.ShowDialog();
-        }
-
-        private void btnAfsluiten_Click(object sender, RoutedEventArgs e)
+        private void btnSluiten_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
 
-        private void btnBeroemdheden_Click(object sender, RoutedEventArgs e)
+        private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            Beroemdheden beroemdheden = new Beroemdheden();
-            beroemdheden.ShowDialog();
+            dataBeroemdheden.ItemsSource = DatabaseOperations.OphalenBeroemdheden();
         }
     }
 }

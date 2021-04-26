@@ -31,7 +31,7 @@
         </Grid.ColumnDefinitions>
         <Image x:Name="imgAfbeelding" Source="clapper-board-custom.png" Grid.Row="0" Grid.Column="0" Grid.RowSpan="8" Margin="25"/>
         <Button x:Name="btnFilm" Content="Films" Grid.Row="0" Grid.Column="1" Margin="10" Click="btnFilm_Click"/>
-        <Button x:Name="btnBeroemdheden" Content="Beroemdheden" Grid.Row="1" Grid.Column="1" Margin="10"/>
+        <Button x:Name="btnBeroemdheden" Content="Beroemdheden" Grid.Row="1" Grid.Column="1" Margin="10" Click="btnBeroemdheden_Click"/>
         <Button x:Name="btnGenres" Content="Genres" Grid.Row="2" Grid.Column="1" Margin="10"/>
         <Button x:Name="btnTalen" Content="Talen" Grid.Row="3" Grid.Column="1" Margin="10"/>
         <Button x:Name="btnLeeftijdsgroepen" Content="Leeftijdsgroepen" Grid.Row="4" Grid.Column="1" Margin="10"/>
