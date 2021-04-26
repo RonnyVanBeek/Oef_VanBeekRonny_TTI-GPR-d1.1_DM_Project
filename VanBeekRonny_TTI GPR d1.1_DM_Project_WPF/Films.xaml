@@ -26,8 +26,13 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <DataGrid x:Name="dataFilms" AutoGenerateColumns="True" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" Margin="10">
-            <!--<DataGridTextColumn Binding="{Binding titel}"-->
+        <DataGrid x:Name="dataFilms" AutoGenerateColumns="false" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" Margin="10">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding titel}" Header="Titel"/>
+                <DataGridTextColumn Binding="{Binding publicatiedatum}" Header="Publicatiedatum"/>
+                <DataGridTextColumn Binding="{Binding speelduur}" Header="Speelduur"/>
+                <DataGridTextColumn Binding="{Binding leeftijdsgroep}" Header="Leeftijd"/>
+            </DataGrid.Columns>
         </DataGrid>
         <Button x:Name="btnSluiten" Content="Sluiten" Grid.Row="1" Grid.Column="4" Margin="10 10 10 10" Click="btnSluiten_Click"/>
     </Grid>
