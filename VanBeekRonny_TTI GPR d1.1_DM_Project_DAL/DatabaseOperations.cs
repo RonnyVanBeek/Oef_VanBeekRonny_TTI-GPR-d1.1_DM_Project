@@ -25,5 +25,23 @@ namespace VanBeekRonny_TTI_GPR_d1._1_DM_Project_DAL
                 return query.ToList();
             }
         }
+
+        public static List<Taal> Talen()
+        {
+            using (IMDbFilmsEntities entities = new IMDbFilmsEntities())
+            {
+                var query = entities.Taal;
+                return query.ToList();
+            }
+        }
+
+        public static List<Leeftijdsgroep> Leeftijdsgroepen()
+        {
+            using (IMDbFilmsEntities entities = new IMDbFilmsEntities())
+            {
+                var query = entities.Leeftijdsgroep;
+                return query.ToList();
+            }
+        }
     }
 }

@@ -34,5 +34,13 @@ namespace VanBeekRonny_TTI_GPR_d1._1_DM_Project_WPF
         {
             dataBeroemdheden.ItemsSource = DatabaseOperations.OphalenBeroemdheden();
         }
+
+        private void dataBeroemdheden_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (dataBeroemdheden.SelectedItem is Beroemdheid beroemdheid)
+            {
+                cmbNationaliteit.SelectedItem = beroemdheid.Nationaliteit;
+            }
+        }
     }
 }
