@@ -33,13 +33,21 @@ namespace VanBeekRonny_TTI_GPR_d1._1_DM_Project_WPF
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             dataBeroemdheden.ItemsSource = DatabaseOperations.OphalenBeroemdheden();
+            cmbNationaliteit.ItemsSource = DatabaseOperations.Nationaliteiten();
+            cmbSterrenbeeld.ItemsSource = DatabaseOperations.Sterrenbeelden();
         }
 
         private void dataBeroemdheden_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (dataBeroemdheden.SelectedItem is Beroemdheid beroemdheid)
             {
+                txtVoornaam.Text = beroemdheid.voornaam;
+                txtAchternaam.Text = beroemdheid.naam;
+                dpGeboortedatum.SelectedDate = beroemdheid.geboortedatum;
                 cmbNationaliteit.SelectedItem = beroemdheid.Nationaliteit;
+                txtLengte.Text = beroemdheid.lengte;
+                txtHandelsmerk.Text = beroemdheid.handelsmerk;
+                cmbSterrenbeeld.SelectedItem = beroemdheid.sterrenbeeldId;
             }
         }
     }

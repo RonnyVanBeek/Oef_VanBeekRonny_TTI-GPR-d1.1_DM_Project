@@ -54,6 +54,7 @@
       <DependentUpon>IMDbFilmsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DatabaseOperations.cs" />
+    <Compile Include="FileOperations.cs" />
     <Compile Include="Film.cs">
       <DependentUpon>IMDbFilmsModel.tt</DependentUpon>
     </Compile>
@@ -87,6 +88,7 @@
     <Compile Include="Nationaliteit.cs">
       <DependentUpon>IMDbFilmsModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Partials\Beroemdheid.cs" />
     <Compile Include="Partials\Leeftijdsgroep.cs" />
     <Compile Include="Partials\Nationaliteit.cs" />
     <Compile Include="Partials\Sterrenbeeld.cs" />

@@ -42,18 +42,18 @@ namespace VanBeekRonny_TTI_GPR_d1._1_DM_Project_WPF
             beroemdheden.ShowDialog();
         }
 
-        private void KnoppenUitschakelen()
+        private void KnoppenIngeschakeld(bool status)
         {
-            btnGenres.IsEnabled = false;
-            btnTalen.IsEnabled = false;
-            btnLeeftijdsgroepen.IsEnabled = false;
-            btnNationaliteiten.IsEnabled = false;
-            btnSterrenbeelden.IsEnabled = false;
+            btnGenres.IsEnabled = status;
+            btnTalen.IsEnabled = status;
+            btnLeeftijdsgroepen.IsEnabled = status;
+            btnNationaliteiten.IsEnabled = status;
+            btnSterrenbeelden.IsEnabled = status;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            KnoppenUitschakelen();
+            KnoppenIngeschakeld(false);
         }
     }
 }

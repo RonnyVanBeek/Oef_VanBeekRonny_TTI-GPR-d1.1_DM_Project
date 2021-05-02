@@ -43,10 +43,10 @@ namespace VanBeekRonny_TTI_GPR_d1._1_DM_Project_WPF
             {
                 txtTitel.Text = film.titel;
                 dpPublicatiedatum.SelectedDate = film.publicatiedatum;
-                txtSpeelduur.Text = film.speelduur;
-                //cmbTaal.SelectedItem = film.Taal;
+                txtSpeelduur.Text = film.speelduur;                
+                cmbTaal.SelectedItem = film.Taal;
                 txtSlogan.Text = film.slogan;
-                //cmbLeeftijdsgroep.SelectedItem = film.Leeftijdsgroep;
+                cmbLeeftijdsgroep.SelectedItem = film.Leeftijdsgroep;
                 txtVerhaallijn.Text = film.verhaallijn;
             }
         }
@@ -56,5 +56,6 @@ namespace VanBeekRonny_TTI_GPR_d1._1_DM_Project_WPF
             FilmsNieuw filmsNieuw = new FilmsNieuw();
             filmsNieuw.ShowDialog();
         }
+
     }
 }

@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using VanBeekRonny_TTI_GPR_d1._1_DM_Project_DAL;
 
 namespace VanBeekRonny_TTI_GPR_d1._1_DM_Project_WPF
 {
@@ -22,6 +23,18 @@ namespace VanBeekRonny_TTI_GPR_d1._1_DM_Project_WPF
         public FilmsNieuw()
         {
             InitializeComponent();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            cmbTaal.ItemsSource = DatabaseOperations.Talen();
+            cmbLeeftijdsgroep.ItemsSource = DatabaseOperations.Leeftijdsgroepen();
+            cmbBeroemdheden.ItemsSource = DatabaseOperations.OphalenBeroemdheden();
+        }
+
+        private void btnAnnuleren_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

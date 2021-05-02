@@ -13,7 +13,7 @@
         TextOptions.TextRenderingMode="Auto"
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
-        Title="Films - Nieuw" Height="450" Width="800">
+        Title="Films - Nieuw" Height="450" Width="800" Loaded="Window_Loaded">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -55,6 +55,6 @@
         <Label x:Name="lblCast" Content="Cast" Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2" Margin="3" FontWeight="Bold" HorizontalAlignment="Center"/>
         <ListBox x:Name="lbCast" Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" Grid.RowSpan="6" Margin="3"/>
         <Button x:Name="btnOpslaan" Content="Opslaan" Grid.Row="10" Grid.Column="0" Margin="3"/>
-        <Button x:Name="btnAnnuleren" Content="Annuleren" Grid.Row="10" Grid.Column="1" Margin="3"/>
+        <Button x:Name="btnAnnuleren" Content="Annuleren" Grid.Row="10" Grid.Column="1" Margin="3" Click="btnAnnuleren_Click"/>
     </Grid>
 </Window>
