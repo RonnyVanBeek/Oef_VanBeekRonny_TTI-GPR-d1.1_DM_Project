@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace VanBeekRonny_TTI_GPR_d1._1_DM_Project_DAL
 {
-    public partial class Leeftijdsgroep
+    public partial class Beroemdheid
     {
         public override string ToString()
         {
-            return leeftijdsgroep1;
+            return $"{this.voornaam} {this.naam}";
         }
     }
 }

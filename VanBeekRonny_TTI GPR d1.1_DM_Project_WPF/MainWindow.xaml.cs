@@ -35,5 +35,25 @@ namespace VanBeekRonny_TTI_GPR_d1._1_DM_Project_WPF
         {
             this.Close();
         }
+
+        private void btnBeroemdheden_Click(object sender, RoutedEventArgs e)
+        {
+            Beroemdheden beroemdheden = new Beroemdheden();
+            beroemdheden.ShowDialog();
+        }
+
+        private void KnoppenIngeschakeld(bool status)
+        {
+            btnGenres.IsEnabled = status;
+            btnTalen.IsEnabled = status;
+            btnLeeftijdsgroepen.IsEnabled = status;
+            btnNationaliteiten.IsEnabled = status;
+            btnSterrenbeelden.IsEnabled = status;
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            KnoppenIngeschakeld(false);
+        }
     }
 }

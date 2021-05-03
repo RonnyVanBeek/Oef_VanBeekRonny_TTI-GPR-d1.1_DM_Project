@@ -54,6 +54,7 @@
       <DependentUpon>IMDbFilmsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DatabaseOperations.cs" />
+    <Compile Include="FileOperations.cs" />
     <Compile Include="Film.cs">
       <DependentUpon>IMDbFilmsModel.tt</DependentUpon>
     </Compile>
@@ -87,7 +88,11 @@
     <Compile Include="Nationaliteit.cs">
       <DependentUpon>IMDbFilmsModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Partials\Beroemdheid.cs" />
     <Compile Include="Partials\Leeftijdsgroep.cs" />
+    <Compile Include="Partials\Nationaliteit.cs" />
+    <Compile Include="Partials\Sterrenbeeld.cs" />
+    <Compile Include="Partials\Taal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sterrenbeeld.cs">
       <DependentUpon>IMDbFilmsModel.tt</DependentUpon>
@@ -124,5 +129,6 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
