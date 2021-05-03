@@ -89,6 +89,7 @@
       <DependentUpon>IMDbFilmsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Partials\Beroemdheid.cs" />
+    <Compile Include="Partials\Film.cs" />
     <Compile Include="Partials\Genre.cs" />
     <Compile Include="Partials\Leeftijdsgroep.cs" />
     <Compile Include="Partials\Nationaliteit.cs" />
@@ -130,6 +131,11 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\VanBeekRonny_TTI GPR d1.1_DM_Project_Models\VanBeekRonny_TTI GPR d1.1_DM_Project_Models.csproj">
+      <Project>{4a433483-e565-4c25-9b18-c94f7811ad4d}</Project>
+      <Name>VanBeekRonny_TTI GPR d1.1_DM_Project_Models</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
