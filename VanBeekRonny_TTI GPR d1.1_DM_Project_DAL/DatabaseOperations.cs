@@ -20,6 +20,20 @@ namespace VanBeekRonny_TTI_GPR_d1._1_DM_Project_DAL
             }
         }
 
+        public static Film OphalenFilmsPerId(int FilmId)
+        {
+            using (IMDbFilmsEntities entities = new IMDbFilmsEntities())
+            {
+                var query = entities.Film
+                    .Include(x => x.Taal)
+                    .Include(x => x.Leeftijdsgroep)
+                    .Include(x => x.FilmGenres.Select(y => y.Genre))
+                    .Include(x => x.FilmBeroemdheden.Select(y => y.Beroemdheid))
+                    .Where(x => x.id.Equals(FilmId));
+                return query.SingleOrDefault();
+            }
+        }
+
         public static List<Beroemdheid> OphalenBeroemdheden()
         {
             using (IMDbFilmsEntities entities = new IMDbFilmsEntities())
@@ -28,6 +42,17 @@ namespace VanBeekRonny_TTI_GPR_d1._1_DM_Project_DAL
                     .Include(x => x.Nationaliteit)
                     .OrderBy(x => x.naam)
                     .ThenBy(x => x.voornaam);
+                return query.ToList();
+            }
+        }
+
+        public static List<Genre> OphalenGenres()
+        {
+            using (IMDbFilmsEntities entities = new IMDbFilmsEntities())
+            {
+                var query = entities.Genre
+                    .Include(x => x.FilmGenres)
+                    .OrderBy(x => x.genre);
                 return query.ToList();
             }
         }

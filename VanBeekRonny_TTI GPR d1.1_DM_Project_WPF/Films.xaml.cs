@@ -27,7 +27,7 @@ namespace VanBeekRonny_TTI_GPR_d1._1_DM_Project_WPF
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            dataFilms.ItemsSource = DatabaseOperations.OphalenFilms();
+            lbFilms.ItemsSource = DatabaseOperations.OphalenFilms();
             cmbTaal.ItemsSource = DatabaseOperations.Talen();
             cmbLeeftijdsgroep.ItemsSource = DatabaseOperations.Leeftijdsgroepen();
         }
@@ -39,7 +39,7 @@ namespace VanBeekRonny_TTI_GPR_d1._1_DM_Project_WPF
 
         private void dataFilms_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (dataFilms.SelectedItem is Film film)
+            if (lbFilms.SelectedItem is Film film)
             {
                 txtTitel.Text = film.titel;
                 dpPublicatiedatum.SelectedDate = film.publicatiedatum;
@@ -57,5 +57,13 @@ namespace VanBeekRonny_TTI_GPR_d1._1_DM_Project_WPF
             filmsNieuw.ShowDialog();
         }
 
+        private void btnBijwerken_Click(object sender, RoutedEventArgs e)
+        {
+            if (lbFilms.SelectedItem is Film film)
+            {
+                FilmsBewerken filmsBewerken = new FilmsBewerken(film.id);
+                filmsBewerken.ShowDialog();
+            }
+        }
     }
 }

@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'V:\Datamanipulatie vanuit een programma\Project\Oef_VanBeekRonny_TTI GPR d1.1_DM_Project\VanBeekRonny_TTI GPR d1.1_DM_Project_DAL\IMDbFilmsModel.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\Admin\source\repos\VanBeekRonny_TTI_DM_Project\VanBeekRonny_TTI GPR d1.1_DM_Project_DAL\IMDbFilmsModel.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

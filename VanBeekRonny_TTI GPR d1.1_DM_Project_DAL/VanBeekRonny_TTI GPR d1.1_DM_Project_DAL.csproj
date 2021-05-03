@@ -89,6 +89,7 @@
       <DependentUpon>IMDbFilmsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Partials\Beroemdheid.cs" />
+    <Compile Include="Partials\Genre.cs" />
     <Compile Include="Partials\Leeftijdsgroep.cs" />
     <Compile Include="Partials\Nationaliteit.cs" />
     <Compile Include="Partials\Sterrenbeeld.cs" />

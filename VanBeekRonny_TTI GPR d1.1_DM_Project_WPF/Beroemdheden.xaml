@@ -27,7 +27,7 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <DataGrid x:Name="dataBeroemdheden" AutoGenerateColumns="False" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" Margin="10" SelectionChanged="dataBeroemdheden_SelectionChanged">
+        <DataGrid x:Name="dataBeroemdheden" AutoGenerateColumns="False" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" Margin="10" IsReadOnly="True" SelectionChanged="dataBeroemdheden_SelectionChanged">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding voornaam}" Header="Voornaam"/>
                 <DataGridTextColumn Binding="{Binding naam}" Header="Achternaam"/>

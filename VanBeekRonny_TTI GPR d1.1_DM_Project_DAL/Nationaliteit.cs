@@ -21,7 +21,7 @@ namespace VanBeekRonny_TTI_GPR_d1._1_DM_Project_DAL
         }
     
         public int id { get; set; }
-        public string nationaliteit1 { get; set; }
+        public string nationaliteit { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Beroemdheid> Beroemdheden { get; set; }

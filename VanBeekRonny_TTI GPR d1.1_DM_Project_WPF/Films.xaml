@@ -27,7 +27,7 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <DataGrid x:Name="dataFilms" AutoGenerateColumns="False" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" Margin="10" IsReadOnly="True" SelectionChanged="dataFilms_SelectionChanged">
+        <DataGrid x:Name="lbFilms" AutoGenerateColumns="False" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" Margin="10" IsReadOnly="True" SelectionChanged="dataFilms_SelectionChanged">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding titel}" Header="Titel"/>
                 <DataGridTextColumn Binding="{Binding publicatiedatum}" Header="Publicatiedatum"/>
@@ -67,7 +67,7 @@
 
         </Grid>
         <Button x:Name="btnNieuw" Content="Nieuw" Grid.Row="2" Grid.Column="0" Margin="10 10 10 10" Click="btnNieuw_Click"/>
-        <Button x:Name="btnBijwerken" Content="Bijwerken" Grid.Row="2" Grid.Column="1" Margin="10 10 10 10"/>
+        <Button x:Name="btnBijwerken" Content="Bijwerken" Grid.Row="2" Grid.Column="1" Margin="10 10 10 10" Click="btnBijwerken_Click"/>
         <Button x:Name="btnVerwijderen" Content="Verwijderen" Grid.Row="2" Grid.Column="2" Margin="10 10 10 10"/>
         <Button x:Name="btnSluiten" Content="Sluiten" Grid.Row="2" Grid.Column="4" Margin="10 10 10 10" Click="btnSluiten_Click"/>
     </Grid>

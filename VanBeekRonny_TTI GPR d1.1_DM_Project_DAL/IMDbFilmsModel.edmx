@@ -290,7 +290,7 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="genre1" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="genre" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="FilmGenres" Relationship="Self.FK_IMDb_FilmGenre" FromRole="Genre" ToRole="FilmGenre" />
         </EntityType>
         <EntityType Name="Leeftijdsgroep">
@@ -298,7 +298,7 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="leeftijdsgroep1" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="leeftijdsgroep" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Films" Relationship="Self.FK_IMDb_FilmLeeftijdsgroep" FromRole="Leeftijdsgroep" ToRole="Film" />
         </EntityType>
         <EntityType Name="Nationaliteit">
@@ -306,7 +306,7 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="nationaliteit1" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nationaliteit" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Beroemdheden" Relationship="Self.FK_IMDb_BeroemdheidNationaliteit" FromRole="Nationaliteit" ToRole="Beroemdheid" />
         </EntityType>
         <EntityType Name="Sterrenbeeld">
@@ -322,7 +322,7 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="taal1" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="taal" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Films" Relationship="Self.FK_IMDb_FilmTaal" FromRole="Taal" ToRole="Film" />
         </EntityType>
         <Association Name="FK_IMDb_Beroemdheid">
@@ -525,7 +525,7 @@
             <EntityTypeMapping TypeName="IMDbFilmsModel.Genre">
               <MappingFragment StoreEntitySet="Genre">
                 <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="genre1" ColumnName="genre" />
+                <ScalarProperty Name="genre" ColumnName="genre" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -533,7 +533,7 @@
             <EntityTypeMapping TypeName="IMDbFilmsModel.Leeftijdsgroep">
               <MappingFragment StoreEntitySet="Leeftijdsgroep">
                 <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="leeftijdsgroep1" ColumnName="leeftijdsgroep" />
+                <ScalarProperty Name="leeftijdsgroep" ColumnName="leeftijdsgroep" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -541,7 +541,7 @@
             <EntityTypeMapping TypeName="IMDbFilmsModel.Nationaliteit">
               <MappingFragment StoreEntitySet="Nationaliteit">
                 <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="nationaliteit1" ColumnName="nationaliteit" />
+                <ScalarProperty Name="nationaliteit" ColumnName="nationaliteit" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -557,7 +557,7 @@
             <EntityTypeMapping TypeName="IMDbFilmsModel.Taal">
               <MappingFragment StoreEntitySet="Taal">
                 <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="taal1" ColumnName="taal" />
+                <ScalarProperty Name="taal" ColumnName="taal" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

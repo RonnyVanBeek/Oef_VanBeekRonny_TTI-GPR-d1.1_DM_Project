@@ -47,7 +47,7 @@ namespace VanBeekRonny_TTI_GPR_d1._1_DM_Project_WPF
                 cmbNationaliteit.SelectedItem = beroemdheid.Nationaliteit;
                 txtLengte.Text = beroemdheid.lengte;
                 txtHandelsmerk.Text = beroemdheid.handelsmerk;
-                cmbSterrenbeeld.SelectedItem = beroemdheid.sterrenbeeldId;
+                cmbSterrenbeeld.SelectedItem = beroemdheid.Sterrenbeeld;
             }
         }
     }

@@ -21,7 +21,7 @@ namespace VanBeekRonny_TTI_GPR_d1._1_DM_Project_DAL
         }
     
         public int id { get; set; }
-        public string genre1 { get; set; }
+        public string genre { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FilmGenre> FilmGenres { get; set; }

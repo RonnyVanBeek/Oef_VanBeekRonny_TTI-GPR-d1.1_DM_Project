@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace VanBeekRonny_TTI_GPR_d1._1_DM_Project_DAL
 {
-    public partial class Nationaliteit
+    public partial class Genre
     {
         public override bool Equals(object obj)
         {
-            return obj is Nationaliteit nationaliteit &&
-                   id == nationaliteit.id;
+            return obj is Genre genre &&
+                   id == genre.id;
         }
 
         public override int GetHashCode()
@@ -21,7 +21,7 @@ namespace VanBeekRonny_TTI_GPR_d1._1_DM_Project_DAL
 
         public override string ToString()
         {
-            return nationaliteit;
+            return this.genre;
         }
     }
 }
