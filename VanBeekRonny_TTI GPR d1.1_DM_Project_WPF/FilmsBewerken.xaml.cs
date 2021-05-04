@@ -66,20 +66,6 @@ namespace VanBeekRonny_TTI_GPR_d1._1_DM_Project_WPF
                 
             }
 
-            //this.lblBeroemdheden = lblBeroemdheden;
-            //this.cmbBeroemdheden = cmbBeroemdheden;
-            //this.btnToevoegen = btnToevoegen;
-            //this.btnVerwijderen = btnVerwijderen;
-            //this.lblCast = lblCast;
-            //this.lbCast = lbCast;
-            //this.lblGenre = lblGenre;
-            //this.cmbGenres = cmbGenres;
-            //this.btnGenreToevoegen = btnGenreToevoegen;
-            //this.btnGenreVerwijderen = btnGenreVerwijderen;
-            //this.lblGenres = lblGenres;
-            //this.lbGenres = lbGenres;
-            //this.btnOpslaan = btnOpslaan;
-            //this.btnAnnuleren = btnAnnuleren;
         }
 
         private void btnAnnuleren_Click(object sender, RoutedEventArgs e)
@@ -180,17 +166,49 @@ namespace VanBeekRonny_TTI_GPR_d1._1_DM_Project_WPF
 
                 if (filmId > 0)
                 {
-                    Film film = DatabaseOperations.OphalenFilmsPerId(this.filmId);
+                    //Film film = DatabaseOperations.OphalenFilmsPerId(this.filmId);
+                    //film.id = filmId;
+                    //film.titel = txtTitel.Text;
+                    //film.publicatiedatum = dpPublicatiedatum.SelectedDate.Value;
+                    //film.speelduur = txtSpeelduur.Text;
+                    //film.verhaallijn = txtVerhaallijn.Text;
+                    //film.Taal = taal;
+                    //film.slogan = txtSlogan.Text;
+                    //film.Leeftijdsgroep = leeftijdsgroep;
+                    
+                    Film film = new Film();
+                    film.id = filmId;
                     film.titel = txtTitel.Text;
                     film.publicatiedatum = dpPublicatiedatum.SelectedDate.Value;
                     film.speelduur = txtSpeelduur.Text;
                     film.verhaallijn = txtVerhaallijn.Text;
-                    film.Taal = taal;
+                    film.taalId = taal.id;
                     film.slogan = txtSlogan.Text;
-                    film.Leeftijdsgroep = leeftijdsgroep;
-                    
-                    MessageBox.Show($"Film {film.titel} bijwerken");
+                    film.leeftijdsgroepId = leeftijdsgroep.id;
 
+                    foreach (Beroemdheid beroemdheid in cast)
+                    {
+                        FilmBeroemdheid filmBeroemdheid = new FilmBeroemdheid();
+                        filmBeroemdheid.filmId = filmId;
+                        filmBeroemdheid.beroemdheidId = beroemdheid.id;
+                        filmBeroemdheid.Beroemdheid = beroemdheid;
+                        filmBeroemdheid.functie = "Acteur";
+                        if (!film.FilmBeroemdheden.Contains(filmBeroemdheid))
+                        {
+                            film.FilmBeroemdheden.Add(filmBeroemdheid);
+                        }
+                    }
+                    
+                    int resultaat = DatabaseOperations.FilmBijwerken(film);
+
+                    if (resultaat>0)
+                    {
+                        this.Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show($"Bijwerken van '{film.titel}' is niet gelukt!");
+                    }
                 }
                 else
                 {
@@ -199,10 +217,21 @@ namespace VanBeekRonny_TTI_GPR_d1._1_DM_Project_WPF
                     film.publicatiedatum = dpPublicatiedatum.SelectedDate.Value;
                     film.speelduur = txtSpeelduur.Text;
                     film.verhaallijn = txtVerhaallijn.Text;
-                    film.Taal = taal;
+                    film.taalId = taal.id;
+                    //film.Taal = taal;
                     film.slogan = txtSlogan.Text;
-                    film.Leeftijdsgroep = leeftijdsgroep;
-                    MessageBox.Show("Film toevoegen");
+                    film.leeftijdsgroepId = leeftijdsgroep.id;
+                    //film.Leeftijdsgroep = leeftijdsgroep;
+                    int resultaat = DatabaseOperations.FilmToevoegen(film);
+                    //MessageBox.Show("Film toevoegen");
+                    if (resultaat>0)
+                    {
+                        this.Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Toevoegen van de nieuwe film is niet gelukt!");
+                    }
                 }
 
             }
@@ -225,5 +254,7 @@ namespace VanBeekRonny_TTI_GPR_d1._1_DM_Project_WPF
             }
             return "";
         }
+
+        
     }
 }

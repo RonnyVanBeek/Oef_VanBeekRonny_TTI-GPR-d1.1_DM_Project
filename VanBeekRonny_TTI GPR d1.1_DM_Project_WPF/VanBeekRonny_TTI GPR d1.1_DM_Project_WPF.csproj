@@ -75,6 +75,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="BeroemdhedenBewerken.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Films.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -97,6 +101,9 @@
     </Compile>
     <Compile Include="Beroemdheden.xaml.cs">
       <DependentUpon>Beroemdheden.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="BeroemdhedenBewerken.xaml.cs">
+      <DependentUpon>BeroemdhedenBewerken.xaml</DependentUpon>
     </Compile>
     <Compile Include="Films.xaml.cs">
       <DependentUpon>Films.xaml</DependentUpon>

@@ -58,6 +58,7 @@ namespace VanBeekRonny_TTI_GPR_d1._1_DM_Project_WPF
             FilmsBewerken nieuweFilm = new FilmsBewerken();
             nieuweFilm.Title = "Film - toevoegen";
             nieuweFilm.ShowDialog();
+            lbFilms.ItemsSource = DatabaseOperations.OphalenFilms();
         }
 
         private void btnBijwerken_Click(object sender, RoutedEventArgs e)
@@ -69,6 +70,7 @@ namespace VanBeekRonny_TTI_GPR_d1._1_DM_Project_WPF
                 filmsBewerken.txtTitel.IsEnabled = false;
                 filmsBewerken.ShowDialog();
                 lbFilms.SelectedIndex = -1;
+                lbFilms.ItemsSource = DatabaseOperations.OphalenFilms();
             }
             else
             {
@@ -121,5 +123,6 @@ namespace VanBeekRonny_TTI_GPR_d1._1_DM_Project_WPF
             lbFilms.ItemsSource = DatabaseOperations.ZoekenFilms(txtZoeken.Text);
             lbFilms.Items.Refresh();
         }
+
     }
 }
