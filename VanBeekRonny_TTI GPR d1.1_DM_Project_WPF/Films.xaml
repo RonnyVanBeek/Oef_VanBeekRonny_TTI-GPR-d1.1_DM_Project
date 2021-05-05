@@ -33,7 +33,7 @@
         <DataGrid x:Name="lbFilms" AutoGenerateColumns="False" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5" Margin="10" IsReadOnly="True" SelectionChanged="dataFilms_SelectionChanged">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding titel}" Header="Titel"/>
-                <DataGridTextColumn Binding="{Binding publicatiedatum}" Header="Publicatiedatum"/>
+                <DataGridTextColumn Binding="{Binding publicatiedatum, StringFormat=\{0:dd/MM/yyyy\}}" Header="Publicatiedatum"/>
                 <DataGridTextColumn Binding="{Binding speelduur}" Header="Speelduur"/>
                 <DataGridTextColumn Binding="{Binding Taal}" Header="Taal"/>
                 <DataGridTextColumn Binding="{Binding Leeftijdsgroep}" Header="Leeftijdsgroep"/>
