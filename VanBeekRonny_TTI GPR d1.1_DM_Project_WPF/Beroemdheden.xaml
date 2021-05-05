@@ -13,7 +13,7 @@
         TextOptions.TextRenderingMode="Auto"
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
-        Title="Beroemdheden" Height="450" Width="800" Loaded="Window_Loaded">
+        Title="Beroemdheden" Height="550" Width="1300" Loaded="Window_Loaded">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -34,7 +34,7 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding voornaam}" Header="Voornaam"/>
                 <DataGridTextColumn Binding="{Binding naam}" Header="Achternaam"/>
-                <DataGridTextColumn Binding="{Binding geboortedatum}" Header="Geboortedatum"/>
+                <DataGridTextColumn Binding="{Binding geboortedatum, StringFormat=\{0:dd/MM/yyyy\}}" Header="Geboortedatum"/>
                 <DataGridTextColumn Binding="{Binding Nationaliteit}" Header="Taal"/>
                 <DataGridTextColumn Binding="{Binding Sterrenbeeld}" Header="Sterrenbeeld"/>
             </DataGrid.Columns>
@@ -68,7 +68,7 @@
             <Label x:Name="lblSterrenbeeld" Content="Sterrenbeeld" Grid.Row="3" Grid.Column="2" FontSize="18"/>
             <ComboBox x:Name="cmbSterrenbeeld" Grid.Row="3" Grid.Column="3" FontSize="16" Margin="2 2 30 2"/>            
         </Grid>
-        <Button x:Name="btnNieuw" Content="Nieuw" Grid.Row="3" Grid.Column="0" Margin="10 10 10 10"/>
+        <Button x:Name="btnNieuw" Content="Nieuw" Grid.Row="3" Grid.Column="0" Margin="10 10 10 10" Click="btnNieuw_Click"/>
         <Button x:Name="btnBijwerken" Content="Bijwerken" Grid.Row="3" Grid.Column="1" Margin="10 10 10 10" Click="btnBijwerken_Click"/>
         <Button x:Name="btnVerwijderen" Content="Verwijderen" Grid.Row="3" Grid.Column="2" Margin="10 10 10 10" Click="btnVerwijderen_Click"/>
         <Button x:Name="btnSluiten" Content="Sluiten" Grid.Row="3" Grid.Column="4" Margin="10 10 10 10" Click="btnSluiten_Click"/>

@@ -39,7 +39,7 @@
         <ComboBox x:Name="cmbSterrenbeeld" Grid.Row="6" Grid.Column="2" Grid.ColumnSpan="2" Margin="3"/>
         <Label x:Name="lblHandelsmer" Content="Handelsmerk" Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="4" Margin="2"/>
         <TextBox x:Name="txtHandelsmerk" Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="4" Margin="3" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"/>
-        <Button x:Name="btnOpslaan" Content="Opslaan" Grid.Row="9" Grid.Column="0" Margin="3"/>
+        <Button x:Name="btnOpslaan" Content="Opslaan" Grid.Row="9" Grid.Column="0" Margin="3" Click="btnOpslaan_Click"/>
         <Button x:Name="btnAnnuleren" Content="Annuleren" Grid.Row="9" Grid.Column="1" Margin="3" Click="btnAnnuleren_Click"/>
     </Grid>
 </Window>

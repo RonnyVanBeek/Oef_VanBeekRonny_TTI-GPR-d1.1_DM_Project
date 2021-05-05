@@ -35,6 +35,7 @@ namespace VanBeekRonny_TTI_GPR_d1._1_DM_Project_WPF
             lbBeroemdheden.ItemsSource = DatabaseOperations.OphalenBeroemdheden();
             cmbNationaliteit.ItemsSource = DatabaseOperations.Nationaliteiten();
             cmbSterrenbeeld.ItemsSource = DatabaseOperations.Sterrenbeelden();
+            InvoerelementenReadOnly();
         }
 
         private void dataBeroemdheden_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -56,12 +57,13 @@ namespace VanBeekRonny_TTI_GPR_d1._1_DM_Project_WPF
             if (lbBeroemdheden.SelectedItem is Beroemdheid beroemdheid)
             {
                 BeroemdhedenBewerken beroemdhedenBewerken = new BeroemdhedenBewerken(beroemdheid.id);
-                beroemdhedenBewerken.Title = $"Beroemdheid '{VolledigeNaam(beroemdheid)}' - aanpassen";
+                beroemdhedenBewerken.Title = $"Beroemdheid '{beroemdheid.ToString()}' - aanpassen";
                 beroemdhedenBewerken.txtVoornaam.IsEnabled = false;
                 beroemdhedenBewerken.txtNaam.IsEnabled = false;
                 beroemdhedenBewerken.ShowDialog();
                 lbBeroemdheden.SelectedIndex = -1;
                 lbBeroemdheden.ItemsSource = DatabaseOperations.OphalenBeroemdheden();
+                FormulierResetten();
             }
             else
             {
@@ -69,10 +71,10 @@ namespace VanBeekRonny_TTI_GPR_d1._1_DM_Project_WPF
             }
         }
 
-        private string VolledigeNaam(Beroemdheid beroemdheid)
-        {
-            return $"{beroemdheid.voornaam} {beroemdheid.naam}";
-        }
+        //public static string VolledigeNaam(Beroemdheid beroemdheid)
+        //{
+        //    return $"{beroemdheid.voornaam} {beroemdheid.naam}";
+        //}
 
         private void txtZoeken_KeyUp(object sender, KeyEventArgs e)
         {
@@ -88,21 +90,22 @@ namespace VanBeekRonny_TTI_GPR_d1._1_DM_Project_WPF
 
             if (string.IsNullOrWhiteSpace(foutmeldingen.ToString()))
             {
-                if (MessageBox.Show($"Weet u zeker dat u '{VolledigeNaam(beroemdheid)}' wilt verwijderen?", "Bevestiging", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                if (MessageBox.Show($"Weet u zeker dat u '{beroemdheid.ToString()}' wilt verwijderen?", "Bevestiging", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
                 {
-                    MessageBox.Show($"Code uitvoeren om de film {VolledigeNaam(beroemdheid)} te verwijderen.");
-                    //if (DatabaseOperations.VerwijderenFilm(film)>0)
-                    //{
-                    //    lbFilms.ItemsSource = DatabaseOperations.OphalenFilms();
-                    //}
-                    //else
-                    //{
-                    //    MessageBox.Show($"Film: {film} is niet verwijderd.");
-                    //}
+                    //MessageBox.Show($"Code uitvoeren om de film {beroemdheid.ToString()} te verwijderen.");
+                    if (DatabaseOperations.VerwijderenBeroemdheid(beroemdheid) > 0)
+                    {
+                        lbBeroemdheden.ItemsSource = DatabaseOperations.OphalenBeroemdheden();
+                    }
+                    else
+                    {
+                        MessageBox.Show($"Beroemdheid: {beroemdheid} is niet verwijderd.");
+                        FormulierResetten();
+                    }
                 }
                 else
                 {
-                    MessageBox.Show($"'{VolledigeNaam(beroemdheid)}' is niet verwijderd? Handeling is geannuleerd.", "Verwijderen geannuleerd");
+                    MessageBox.Show($"'{beroemdheid.ToString()}' is niet verwijderd? Handeling is geannuleerd.", "Verwijderen geannuleerd");
                 }
             }
             else
@@ -118,6 +121,38 @@ namespace VanBeekRonny_TTI_GPR_d1._1_DM_Project_WPF
                 return "Selecteer een beroemdheid!" + Environment.NewLine;
             }
             return "";
+        }
+
+        private void btnNieuw_Click(object sender, RoutedEventArgs e)
+        {
+            BeroemdhedenBewerken beroemdhedenBewerken = new BeroemdhedenBewerken();
+            beroemdhedenBewerken.Title = $"Beroemdheid - toevoegen";
+            beroemdhedenBewerken.txtNaam.Focus();
+            beroemdhedenBewerken.ShowDialog();
+            lbBeroemdheden.ItemsSource = DatabaseOperations.OphalenBeroemdheden();
+            FormulierResetten();
+        }
+
+        private void FormulierResetten()
+        {
+            txtVoornaam.Clear();
+            txtAchternaam.Clear();
+            dpGeboortedatum.SelectedDate = null;
+            cmbNationaliteit.SelectedIndex = -1;
+            txtLengte.Clear();
+            txtHandelsmerk.Clear();
+            cmbSterrenbeeld.SelectedIndex = -1;
+        }
+
+        private void InvoerelementenReadOnly()
+        {
+            txtVoornaam.IsReadOnly = true;
+            txtAchternaam.IsReadOnly = true;
+            dpGeboortedatum.IsEnabled = false;
+            cmbNationaliteit.IsReadOnly = true;
+            txtLengte.IsReadOnly = true;
+            txtHandelsmerk.IsReadOnly = true;
+            cmbSterrenbeeld.IsReadOnly = true;
         }
     }
 }

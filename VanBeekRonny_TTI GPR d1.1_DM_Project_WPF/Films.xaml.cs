@@ -23,6 +23,7 @@ namespace VanBeekRonny_TTI_GPR_d1._1_DM_Project_WPF
         public Films()
         {
             InitializeComponent();
+            FormulierResetten();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -30,6 +31,7 @@ namespace VanBeekRonny_TTI_GPR_d1._1_DM_Project_WPF
             lbFilms.ItemsSource = DatabaseOperations.OphalenFilms();
             cmbTaal.ItemsSource = DatabaseOperations.Talen();
             cmbLeeftijdsgroep.ItemsSource = DatabaseOperations.Leeftijdsgroepen();
+            InvoerelementenReadOnly();
         }
 
         private void btnSluiten_Click(object sender, RoutedEventArgs e)
@@ -71,6 +73,7 @@ namespace VanBeekRonny_TTI_GPR_d1._1_DM_Project_WPF
                 filmsBewerken.ShowDialog();
                 lbFilms.SelectedIndex = -1;
                 lbFilms.ItemsSource = DatabaseOperations.OphalenFilms();
+                FormulierResetten();
             }
             else
             {
@@ -97,6 +100,7 @@ namespace VanBeekRonny_TTI_GPR_d1._1_DM_Project_WPF
                     //{
                     //    MessageBox.Show($"Film: {film} is niet verwijderd.");
                     //}
+                    FormulierResetten();
                 }
                 else
                 {
@@ -124,5 +128,26 @@ namespace VanBeekRonny_TTI_GPR_d1._1_DM_Project_WPF
             lbFilms.Items.Refresh();
         }
 
+        private void FormulierResetten()
+        {
+            txtTitel.Clear();
+            dpPublicatiedatum.SelectedDate = null;
+            txtSpeelduur.Clear();
+            cmbTaal.SelectedIndex = -1;
+            txtSlogan.Clear();
+            cmbLeeftijdsgroep.SelectedIndex = -1;
+            txtVerhaallijn.Clear();            
+        }
+
+        private void InvoerelementenReadOnly()
+        {
+            txtTitel.IsReadOnly = true;
+            dpPublicatiedatum.IsEnabled = false;
+            txtSpeelduur.IsReadOnly = true;
+            cmbTaal.IsReadOnly = true;
+            txtSlogan.IsReadOnly = true;
+            cmbLeeftijdsgroep.IsReadOnly = true;
+            txtVerhaallijn.IsReadOnly = true;
+        }
     }
 }

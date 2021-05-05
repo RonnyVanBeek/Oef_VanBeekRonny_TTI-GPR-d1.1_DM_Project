@@ -90,6 +90,7 @@
     </Compile>
     <Compile Include="Partials\Beroemdheid.cs" />
     <Compile Include="Partials\Film.cs" />
+    <Compile Include="Partials\FilmBeroemdheid.cs" />
     <Compile Include="Partials\Genre.cs" />
     <Compile Include="Partials\Leeftijdsgroep.cs" />
     <Compile Include="Partials\Nationaliteit.cs" />

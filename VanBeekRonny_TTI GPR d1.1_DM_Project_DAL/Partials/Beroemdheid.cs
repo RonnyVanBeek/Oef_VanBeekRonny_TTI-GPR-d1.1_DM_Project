@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VanBeekRonny_TTI_GPR_d1._1_DM_Project_Models;
 
 namespace VanBeekRonny_TTI_GPR_d1._1_DM_Project_DAL
 {
-    public partial class Beroemdheid
+    public partial class Beroemdheid:Basisklasse
     {
         public override bool Equals(object obj)
         {
@@ -30,6 +31,21 @@ namespace VanBeekRonny_TTI_GPR_d1._1_DM_Project_DAL
             return $"{this.voornaam} {this.naam}";
         }
 
+        public override string this[string columnName]
+        {
+            get
+            {
+                if (columnName == nameof(naam) && string.IsNullOrWhiteSpace(naam))
+                {
+                    return "Naam is een verplicht veld!";
+                }
+                if (columnName == nameof(voornaam) && string.IsNullOrWhiteSpace(voornaam))
+                {
+                    return "Voornaam is een verplicht veld!";
+                }
+                return "";
+            }
+        }
 
     }
 }

@@ -179,8 +179,63 @@ namespace VanBeekRonny_TTI_GPR_d1._1_DM_Project_DAL
                 var query = entities.Beroemdheid
                     .Include(x => x.Nationaliteit)
                     .Include(x => x.Sterrenbeeld)
-                    .Where(x => x.naam.Contains(zoekwaarde));
+                    .Where(x => x.naam.Contains(zoekwaarde) || x.voornaam.Contains(zoekwaarde));
                 return query.ToList();
+            }
+        }
+
+        public static int BeroemdheidToevoegen(Beroemdheid beroemdheid) //5/05/2021
+        {
+            try
+            {
+                using (IMDbFilmsEntities entities = new IMDbFilmsEntities())
+                {
+                    entities.Beroemdheid.Add(beroemdheid);
+                    return entities.SaveChanges();
+
+                }
+            }
+            catch (Exception ex)
+            {
+                FileOperations.FoutLoggen(ex);
+                return 0;
+            }
+        }
+
+        public static int BeroemdheidBijwerken(Beroemdheid beroemdheid) //5/05/2021
+        {
+            try
+            {
+                using (IMDbFilmsEntities entities = new IMDbFilmsEntities())
+                {
+                    entities.Entry(beroemdheid).State = EntityState.Modified;
+                    return entities.SaveChanges();
+
+                }
+            }
+            catch (Exception ex)
+            {
+                FileOperations.FoutLoggen(ex);
+                return 0;
+            }
+        }
+
+        public static int VerwijderenBeroemdheid(Beroemdheid beroemdheid) //5/05/2021
+        {
+            try
+            {
+                using (IMDbFilmsEntities entities = new IMDbFilmsEntities())
+                {
+
+                    entities.Entry(beroemdheid).State = EntityState.Deleted;
+                    return entities.SaveChanges();
+
+                }
+            }
+            catch (Exception ex)
+            {
+                FileOperations.FoutLoggen(ex);
+                return 0;
             }
         }
     }

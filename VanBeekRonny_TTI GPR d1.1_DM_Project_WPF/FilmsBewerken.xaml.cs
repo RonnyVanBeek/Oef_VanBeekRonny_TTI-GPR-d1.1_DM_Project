@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using VanBeekRonny_TTI_GPR_d1._1_DM_Project_Models;
 using VanBeekRonny_TTI_GPR_d1._1_DM_Project_DAL;
 
 namespace VanBeekRonny_TTI_GPR_d1._1_DM_Project_WPF
@@ -164,76 +165,66 @@ namespace VanBeekRonny_TTI_GPR_d1._1_DM_Project_WPF
                 Taal taal = cmbTaal.SelectedItem as Taal;
                 Leeftijdsgroep leeftijdsgroep = cmbLeeftijdsgroep.SelectedItem as Leeftijdsgroep;
 
-                if (filmId > 0)
+                Film film = new Film();
+                film.id = filmId;
+                film.titel = txtTitel.Text;
+                film.publicatiedatum = dpPublicatiedatum.SelectedDate.Value;
+                film.speelduur = txtSpeelduur.Text;
+                film.verhaallijn = txtVerhaallijn.Text;
+                film.taalId = taal.id;
+                film.slogan = txtSlogan.Text;
+                film.leeftijdsgroepId = leeftijdsgroep.id;
+
+                foreach (FilmBeroemdheid filmBeroemdheidDb in film.FilmBeroemdheden)
                 {
-                    //Film film = DatabaseOperations.OphalenFilmsPerId(this.filmId);
-                    //film.id = filmId;
-                    //film.titel = txtTitel.Text;
-                    //film.publicatiedatum = dpPublicatiedatum.SelectedDate.Value;
-                    //film.speelduur = txtSpeelduur.Text;
-                    //film.verhaallijn = txtVerhaallijn.Text;
-                    //film.Taal = taal;
-                    //film.slogan = txtSlogan.Text;
-                    //film.Leeftijdsgroep = leeftijdsgroep;
-                    
-                    Film film = new Film();
-                    film.id = filmId;
-                    film.titel = txtTitel.Text;
-                    film.publicatiedatum = dpPublicatiedatum.SelectedDate.Value;
-                    film.speelduur = txtSpeelduur.Text;
-                    film.verhaallijn = txtVerhaallijn.Text;
-                    film.taalId = taal.id;
-                    film.slogan = txtSlogan.Text;
-                    film.leeftijdsgroepId = leeftijdsgroep.id;
-
-                    foreach (Beroemdheid beroemdheid in cast)
+                    if (!cast.Contains(filmBeroemdheidDb.Beroemdheid))
                     {
-                        FilmBeroemdheid filmBeroemdheid = new FilmBeroemdheid();
-                        filmBeroemdheid.filmId = filmId;
-                        filmBeroemdheid.beroemdheidId = beroemdheid.id;
-                        filmBeroemdheid.Beroemdheid = beroemdheid;
-                        filmBeroemdheid.functie = "Acteur";
-                        if (!film.FilmBeroemdheden.Contains(filmBeroemdheid))
-                        {
-                            film.FilmBeroemdheden.Add(filmBeroemdheid);
-                        }
+                        film.FilmBeroemdheden.Remove(filmBeroemdheidDb);
                     }
-                    
-                    int resultaat = DatabaseOperations.FilmBijwerken(film);
+                }
 
-                    if (resultaat>0)
+                foreach (Beroemdheid beroemdheid in cast) //Test om beroemdheden aan de film toe te voegen
+                {
+                    FilmBeroemdheid filmBeroemdheid = new FilmBeroemdheid();
+                    filmBeroemdheid.filmId = filmId;
+                    filmBeroemdheid.beroemdheidId = beroemdheid.id;
+                    filmBeroemdheid.functie = "Acteur";
+                    if (!film.FilmBeroemdheden.Contains(filmBeroemdheid))
                     {
-                        this.Close();
+                        film.FilmBeroemdheden.Add(filmBeroemdheid);
+                    }
+                }
+
+                if (film.IsGeldig()) //Controle of de velden die ingevuld moeten zijn, ook ingevuld zijn.
+                {
+                    int resultaat;
+                    string actie = ""; //Actie in messagebox
+
+                    if (filmId > 0) //bewerken
+                    {
+                        actie = "Bijwerken";
+                        film.id = filmId;
+                        resultaat = DatabaseOperations.FilmBijwerken(film); //Query film bijwerken wordt uitgevoerd, en geeft een resultaat terug.
+                    }
+                    else //nieuw
+                    {
+                        actie = "Toevoegen";
+                        resultaat = DatabaseOperations.FilmToevoegen(film); //Query film toevoegen wordt uitgevoerd, en geeft een resultaat terug.
+                    }
+                    //Resultaat groter dan 0 > actie is geslaagd, resultaat = 0 > actie is niet geslaagd.
+                    if (resultaat > 0)
+                    {
+                        this.Close(); //Als de film is bijgewerkt of toegevoegd, wordt het venster gesloten.
                     }
                     else
                     {
-                        MessageBox.Show($"Bijwerken van '{film.titel}' is niet gelukt!");
+                        MessageBox.Show($"{actie} van '{film.titel}' is niet gelukt!"); //Als de film niet is bijgewerkt, krijg je deze melding.
                     }
                 }
                 else
                 {
-                    Film film = new Film();
-                    film.titel = txtTitel.Text;
-                    film.publicatiedatum = dpPublicatiedatum.SelectedDate.Value;
-                    film.speelduur = txtSpeelduur.Text;
-                    film.verhaallijn = txtVerhaallijn.Text;
-                    film.taalId = taal.id;
-                    //film.Taal = taal;
-                    film.slogan = txtSlogan.Text;
-                    film.leeftijdsgroepId = leeftijdsgroep.id;
-                    //film.Leeftijdsgroep = leeftijdsgroep;
-                    int resultaat = DatabaseOperations.FilmToevoegen(film);
-                    //MessageBox.Show("Film toevoegen");
-                    if (resultaat>0)
-                    {
-                        this.Close();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Toevoegen van de nieuwe film is niet gelukt!");
-                    }
+                    MessageBox.Show(film.Error, "Foutmelding");
                 }
-
             }
             else
             {
