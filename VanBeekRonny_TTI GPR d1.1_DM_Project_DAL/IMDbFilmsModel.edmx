@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="IMDbFilmsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="IMDbFilmsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Beroemdheid">
           <Key>
             <PropertyRef Name="id" />
@@ -14,7 +14,7 @@
           <Property Name="voornaam" Type="varchar" MaxLength="22" Nullable="false" />
           <Property Name="geboortedatum" Type="date" />
           <Property Name="nationaliteitId" Type="int" />
-          <Property Name="lengte" Type="varchar" MaxLength="6" />
+          <Property Name="lengte" Type="float" />
           <Property Name="handelsmerk" Type="varchar" MaxLength="100" />
           <Property Name="sterrenbeeldId" Type="int" />
         </EntityType>
@@ -226,27 +226,10 @@
             <End Role="FilmGenre" EntitySet="FilmGenre" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="IMDbFilmsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Beroemdheid">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="naam" Type="String" MaxLength="22" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="voornaam" Type="String" MaxLength="22" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="geboortedatum" Type="DateTime" Precision="0" />
-          <Property Name="nationaliteitId" Type="Int32" />
-          <Property Name="lengte" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
-          <Property Name="handelsmerk" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="sterrenbeeldId" Type="Int32" />
-          <NavigationProperty Name="FilmBeroemdheden" Relationship="Self.FK_IMDb_Beroemdheid" FromRole="Beroemdheid" ToRole="FilmBeroemdheid" />
-          <NavigationProperty Name="Nationaliteit" Relationship="Self.FK_IMDb_BeroemdheidNationaliteit" FromRole="Beroemdheid" ToRole="Nationaliteit" />
-          <NavigationProperty Name="Sterrenbeeld" Relationship="Self.FK_IMDb_BeroemdheidSterrenbeeld" FromRole="Beroemdheid" ToRole="Sterrenbeeld" />
-        </EntityType>
         <EntityType Name="Film">
           <Key>
             <PropertyRef Name="id" />
@@ -272,8 +255,8 @@
           <Property Name="filmId" Type="Int32" Nullable="false" />
           <Property Name="beroemdheidId" Type="Int32" Nullable="false" />
           <Property Name="functie" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Beroemdheid" Relationship="Self.FK_IMDb_Beroemdheid" FromRole="FilmBeroemdheid" ToRole="Beroemdheid" />
           <NavigationProperty Name="Film" Relationship="Self.FK_IMDb_Film" FromRole="FilmBeroemdheid" ToRole="Film" />
+          <NavigationProperty Name="Beroemdheid" Relationship="IMDbFilmsModel.FK_IMDb_Beroemdheid" FromRole="FilmBeroemdheid" ToRole="Beroemdheid" />
         </EntityType>
         <EntityType Name="FilmGenre">
           <Key>
@@ -301,22 +284,6 @@
           <Property Name="leeftijdsgroep" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Films" Relationship="Self.FK_IMDb_FilmLeeftijdsgroep" FromRole="Leeftijdsgroep" ToRole="Film" />
         </EntityType>
-        <EntityType Name="Nationaliteit">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="nationaliteit" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Beroemdheden" Relationship="Self.FK_IMDb_BeroemdheidNationaliteit" FromRole="Nationaliteit" ToRole="Beroemdheid" />
-        </EntityType>
-        <EntityType Name="Sterrenbeeld">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="sterrebeeld" Type="String" MaxLength="22" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Beroemdheden" Relationship="Self.FK_IMDb_BeroemdheidSterrenbeeld" FromRole="Sterrenbeeld" ToRole="Beroemdheid" />
-        </EntityType>
         <EntityType Name="Taal">
           <Key>
             <PropertyRef Name="id" />
@@ -325,42 +292,6 @@
           <Property Name="taal" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Films" Relationship="Self.FK_IMDb_FilmTaal" FromRole="Taal" ToRole="Film" />
         </EntityType>
-        <Association Name="FK_IMDb_Beroemdheid">
-          <End Role="Beroemdheid" Type="Self.Beroemdheid" Multiplicity="1" />
-          <End Role="FilmBeroemdheid" Type="Self.FilmBeroemdheid" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Beroemdheid">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="FilmBeroemdheid">
-              <PropertyRef Name="beroemdheidId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_IMDb_BeroemdheidNationaliteit">
-          <End Role="Nationaliteit" Type="Self.Nationaliteit" Multiplicity="0..1" />
-          <End Role="Beroemdheid" Type="Self.Beroemdheid" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Nationaliteit">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Beroemdheid">
-              <PropertyRef Name="nationaliteitId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_IMDb_BeroemdheidSterrenbeeld">
-          <End Role="Sterrenbeeld" Type="Self.Sterrenbeeld" Multiplicity="0..1" />
-          <End Role="Beroemdheid" Type="Self.Beroemdheid" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Sterrenbeeld">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Beroemdheid">
-              <PropertyRef Name="sterrenbeeldId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_IMDb_Film">
           <End Role="Film" Type="Self.Film" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -426,27 +357,12 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="IMDbFilmsEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Beroemdheid" EntityType="Self.Beroemdheid" />
           <EntitySet Name="Film" EntityType="Self.Film" />
           <EntitySet Name="FilmBeroemdheid" EntityType="Self.FilmBeroemdheid" />
           <EntitySet Name="FilmGenre" EntityType="Self.FilmGenre" />
           <EntitySet Name="Genre" EntityType="Self.Genre" />
           <EntitySet Name="Leeftijdsgroep" EntityType="Self.Leeftijdsgroep" />
-          <EntitySet Name="Nationaliteit" EntityType="Self.Nationaliteit" />
-          <EntitySet Name="Sterrenbeeld" EntityType="Self.Sterrenbeeld" />
           <EntitySet Name="Taal" EntityType="Self.Taal" />
-          <AssociationSet Name="FK_IMDb_Beroemdheid" Association="Self.FK_IMDb_Beroemdheid">
-            <End Role="Beroemdheid" EntitySet="Beroemdheid" />
-            <End Role="FilmBeroemdheid" EntitySet="FilmBeroemdheid" />
-          </AssociationSet>
-          <AssociationSet Name="FK_IMDb_BeroemdheidNationaliteit" Association="Self.FK_IMDb_BeroemdheidNationaliteit">
-            <End Role="Nationaliteit" EntitySet="Nationaliteit" />
-            <End Role="Beroemdheid" EntitySet="Beroemdheid" />
-          </AssociationSet>
-          <AssociationSet Name="FK_IMDb_BeroemdheidSterrenbeeld" Association="Self.FK_IMDb_BeroemdheidSterrenbeeld">
-            <End Role="Sterrenbeeld" EntitySet="Sterrenbeeld" />
-            <End Role="Beroemdheid" EntitySet="Beroemdheid" />
-          </AssociationSet>
           <AssociationSet Name="FK_IMDb_Film" Association="Self.FK_IMDb_Film">
             <End Role="Film" EntitySet="Film" />
             <End Role="FilmBeroemdheid" EntitySet="FilmBeroemdheid" />
@@ -467,27 +383,96 @@
             <End Role="Genre" EntitySet="Genre" />
             <End Role="FilmGenre" EntitySet="FilmGenre" />
           </AssociationSet>
+          <EntitySet Name="Beroemdheid" EntityType="IMDbFilmsModel.Beroemdheid" />
+          <EntitySet Name="Nationaliteit" EntityType="IMDbFilmsModel.Nationaliteit" />
+          <EntitySet Name="Sterrenbeeld" EntityType="IMDbFilmsModel.Sterrenbeeld" />
+          <AssociationSet Name="FK_IMDb_Beroemdheid" Association="IMDbFilmsModel.FK_IMDb_Beroemdheid">
+            <End Role="Beroemdheid" EntitySet="Beroemdheid" />
+            <End Role="FilmBeroemdheid" EntitySet="FilmBeroemdheid" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IMDb_BeroemdheidNationaliteit" Association="IMDbFilmsModel.FK_IMDb_BeroemdheidNationaliteit">
+            <End Role="Nationaliteit" EntitySet="Nationaliteit" />
+            <End Role="Beroemdheid" EntitySet="Beroemdheid" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IMDb_BeroemdheidSterrenbeeld" Association="IMDbFilmsModel.FK_IMDb_BeroemdheidSterrenbeeld">
+            <End Role="Sterrenbeeld" EntitySet="Sterrenbeeld" />
+            <End Role="Beroemdheid" EntitySet="Beroemdheid" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Beroemdheid">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="naam" Type="String" Nullable="false" MaxLength="22" FixedLength="false" Unicode="false" />
+          <Property Name="voornaam" Type="String" Nullable="false" MaxLength="22" FixedLength="false" Unicode="false" />
+          <Property Name="geboortedatum" Type="DateTime" Precision="0" />
+          <Property Name="nationaliteitId" Type="Int32" />
+          <Property Name="lengte" Type="Double" />
+          <Property Name="handelsmerk" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="sterrenbeeldId" Type="Int32" />
+          <NavigationProperty Name="FilmBeroemdheden" Relationship="IMDbFilmsModel.FK_IMDb_Beroemdheid" FromRole="Beroemdheid" ToRole="FilmBeroemdheid" />
+          <NavigationProperty Name="Nationaliteit" Relationship="IMDbFilmsModel.FK_IMDb_BeroemdheidNationaliteit" FromRole="Beroemdheid" ToRole="Nationaliteit" />
+          <NavigationProperty Name="Sterrenbeeld" Relationship="IMDbFilmsModel.FK_IMDb_BeroemdheidSterrenbeeld" FromRole="Beroemdheid" ToRole="Sterrenbeeld" />
+        </EntityType>
+        <EntityType Name="Nationaliteit">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nationaliteit" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Beroemdheden" Relationship="IMDbFilmsModel.FK_IMDb_BeroemdheidNationaliteit" FromRole="Nationaliteit" ToRole="Beroemdheid" />
+        </EntityType>
+        <EntityType Name="Sterrenbeeld">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="sterrebeeld" Type="String" Nullable="false" MaxLength="22" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Beroemdheden" Relationship="IMDbFilmsModel.FK_IMDb_BeroemdheidSterrenbeeld" FromRole="Sterrenbeeld" ToRole="Beroemdheid" />
+        </EntityType>
+        <Association Name="FK_IMDb_Beroemdheid">
+          <End Type="IMDbFilmsModel.Beroemdheid" Role="Beroemdheid" Multiplicity="1" />
+          <End Type="IMDbFilmsModel.FilmBeroemdheid" Role="FilmBeroemdheid" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Beroemdheid">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="FilmBeroemdheid">
+              <PropertyRef Name="beroemdheidId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IMDb_BeroemdheidNationaliteit">
+          <End Type="IMDbFilmsModel.Nationaliteit" Role="Nationaliteit" Multiplicity="0..1" />
+          <End Type="IMDbFilmsModel.Beroemdheid" Role="Beroemdheid" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Nationaliteit">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Beroemdheid">
+              <PropertyRef Name="nationaliteitId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IMDb_BeroemdheidSterrenbeeld">
+          <End Type="IMDbFilmsModel.Sterrenbeeld" Role="Sterrenbeeld" Multiplicity="0..1" />
+          <End Type="IMDbFilmsModel.Beroemdheid" Role="Beroemdheid" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sterrenbeeld">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Beroemdheid">
+              <PropertyRef Name="sterrenbeeldId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="IMDbFilmsModelStoreContainer" CdmEntityContainer="IMDbFilmsEntities">
-          <EntitySetMapping Name="Beroemdheid">
-            <EntityTypeMapping TypeName="IMDbFilmsModel.Beroemdheid">
-              <MappingFragment StoreEntitySet="Beroemdheid">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="naam" ColumnName="naam" />
-                <ScalarProperty Name="voornaam" ColumnName="voornaam" />
-                <ScalarProperty Name="geboortedatum" ColumnName="geboortedatum" />
-                <ScalarProperty Name="nationaliteitId" ColumnName="nationaliteitId" />
-                <ScalarProperty Name="lengte" ColumnName="lengte" />
-                <ScalarProperty Name="handelsmerk" ColumnName="handelsmerk" />
-                <ScalarProperty Name="sterrenbeeldId" ColumnName="sterrenbeeldId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Film">
             <EntityTypeMapping TypeName="IMDbFilmsModel.Film">
               <MappingFragment StoreEntitySet="Film">
@@ -537,27 +522,41 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Taal">
+            <EntityTypeMapping TypeName="IMDbFilmsModel.Taal">
+              <MappingFragment StoreEntitySet="Taal">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="taal" ColumnName="taal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Beroemdheid">
+            <EntityTypeMapping TypeName="IMDbFilmsModel.Beroemdheid">
+              <MappingFragment StoreEntitySet="Beroemdheid">
+                <ScalarProperty Name="sterrenbeeldId" ColumnName="sterrenbeeldId" />
+                <ScalarProperty Name="handelsmerk" ColumnName="handelsmerk" />
+                <ScalarProperty Name="lengte" ColumnName="lengte" />
+                <ScalarProperty Name="nationaliteitId" ColumnName="nationaliteitId" />
+                <ScalarProperty Name="geboortedatum" ColumnName="geboortedatum" />
+                <ScalarProperty Name="voornaam" ColumnName="voornaam" />
+                <ScalarProperty Name="naam" ColumnName="naam" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Nationaliteit">
             <EntityTypeMapping TypeName="IMDbFilmsModel.Nationaliteit">
               <MappingFragment StoreEntitySet="Nationaliteit">
-                <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="nationaliteit" ColumnName="nationaliteit" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Sterrenbeeld">
             <EntityTypeMapping TypeName="IMDbFilmsModel.Sterrenbeeld">
               <MappingFragment StoreEntitySet="Sterrenbeeld">
-                <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="sterrebeeld" ColumnName="sterrebeeld" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Taal">
-            <EntityTypeMapping TypeName="IMDbFilmsModel.Taal">
-              <MappingFragment StoreEntitySet="Taal">
                 <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="taal" ColumnName="taal" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

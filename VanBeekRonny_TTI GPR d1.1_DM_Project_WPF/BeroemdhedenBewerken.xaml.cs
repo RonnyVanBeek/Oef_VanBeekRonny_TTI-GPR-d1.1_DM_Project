@@ -37,7 +37,7 @@ namespace VanBeekRonny_TTI_GPR_d1._1_DM_Project_WPF
             this.txtVoornaam.Text = beroemdheid.voornaam;
             this.dpGeboortedatum.SelectedDate = beroemdheid.geboortedatum;
             this.cmbNationaliteit.SelectedItem = beroemdheid.Nationaliteit;
-            this.txtLengte.Text = beroemdheid.lengte;
+            this.txtLengte.Text = beroemdheid.lengte.ToString();
             this.cmbSterrenbeeld.SelectedItem = beroemdheid.Sterrenbeeld;
             this.txtHandelsmerk.Text = beroemdheid.handelsmerk;
             this.btnOpslaan.Content = "Bijwerken";
@@ -60,11 +60,13 @@ namespace VanBeekRonny_TTI_GPR_d1._1_DM_Project_WPF
             StringBuilder foutmeldingen = new StringBuilder();
             foutmeldingen.Append(Valideer("cmbNationaliteit"));
             foutmeldingen.Append(Valideer("cmbSterrenbeeld"));
+            foutmeldingen.Append(Valideer("txtLengte"));
 
             if (string.IsNullOrWhiteSpace(foutmeldingen.ToString()))
-            {
+            {                
                 Nationaliteit nationaliteit = cmbNationaliteit.SelectedItem as Nationaliteit;
                 Sterrenbeeld sterrenbeeld = cmbSterrenbeeld.SelectedItem as Sterrenbeeld;
+
 
                 //Nieuw object aanmaken om binnen de IF ofwel te gaan bijwerken, ofwel te gaan toevoegen.
                 Beroemdheid beroemdheid = new Beroemdheid();
@@ -72,7 +74,7 @@ namespace VanBeekRonny_TTI_GPR_d1._1_DM_Project_WPF
                 beroemdheid.voornaam = txtVoornaam.Text;
                 beroemdheid.geboortedatum = dpGeboortedatum.SelectedDate;
                 beroemdheid.nationaliteitId = nationaliteit.id;
-                beroemdheid.lengte = txtLengte.Text;
+                beroemdheid.lengte = double.Parse(txtLengte.Text);
                 beroemdheid.sterrenbeeldId = sterrenbeeld.id;
                 beroemdheid.handelsmerk = txtHandelsmerk.Text;
 
@@ -125,6 +127,10 @@ namespace VanBeekRonny_TTI_GPR_d1._1_DM_Project_WPF
             if (columnName == nameof(cmbSterrenbeeld) && cmbSterrenbeeld.SelectedItem == null)
             {
                 return "Selecteer een sterrenbeeld!" + Environment.NewLine;
+            }
+            if (columnName == nameof(txtLengte) && double.TryParse(txtLengte.Text,out double length)==false)
+            {
+                return "Lengte moet een numerieke waarde bevatten!!" + Environment.NewLine;
             }
             return "";
         }

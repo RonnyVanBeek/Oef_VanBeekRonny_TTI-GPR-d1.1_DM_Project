@@ -19,7 +19,7 @@ namespace VanBeekRonny_TTI_GPR_d1._1_DM_Project_DAL
         public int beroemdheidId { get; set; }
         public string functie { get; set; }
     
-        public virtual Beroemdheid Beroemdheid { get; set; }
         public virtual Film Film { get; set; }
+        public virtual Beroemdheid Beroemdheid { get; set; }
     }
 }

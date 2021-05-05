@@ -25,7 +25,7 @@ namespace VanBeekRonny_TTI_GPR_d1._1_DM_Project_DAL
         public string voornaam { get; set; }
         public Nullable<System.DateTime> geboortedatum { get; set; }
         public Nullable<int> nationaliteitId { get; set; }
-        public string lengte { get; set; }
+        public Nullable<double> lengte { get; set; }
         public string handelsmerk { get; set; }
         public Nullable<int> sterrenbeeldId { get; set; }
     

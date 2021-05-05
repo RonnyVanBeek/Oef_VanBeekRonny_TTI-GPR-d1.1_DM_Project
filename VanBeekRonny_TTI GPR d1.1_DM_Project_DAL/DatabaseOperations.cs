@@ -15,7 +15,8 @@ namespace VanBeekRonny_TTI_GPR_d1._1_DM_Project_DAL
             {
                 var query = entities.Film
                     .Include(x => x.Taal)
-                    .Include(x => x.Leeftijdsgroep);
+                    .Include(x => x.Leeftijdsgroep)
+                    .Include(x => x.FilmBeroemdheden);
                 return query.ToList();
             }
         }
