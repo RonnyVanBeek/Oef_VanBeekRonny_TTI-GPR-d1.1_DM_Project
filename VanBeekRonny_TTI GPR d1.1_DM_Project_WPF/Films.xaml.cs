@@ -28,7 +28,7 @@ namespace VanBeekRonny_TTI_GPR_d1._1_DM_Project_WPF
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            lbFilms.ItemsSource = DatabaseOperations.OphalenFilms();
+            dgFilms.ItemsSource = DatabaseOperations.OphalenFilms();
             cmbTaal.ItemsSource = DatabaseOperations.Talen();
             cmbLeeftijdsgroep.ItemsSource = DatabaseOperations.Leeftijdsgroepen();
             InvoerelementenReadOnly();
@@ -41,7 +41,7 @@ namespace VanBeekRonny_TTI_GPR_d1._1_DM_Project_WPF
 
         private void dataFilms_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (lbFilms.SelectedItem is Film film)
+            if (dgFilms.SelectedItem is Film film)
             {
                 txtTitel.Text = film.titel;
                 dpPublicatiedatum.SelectedDate = film.publicatiedatum;
@@ -60,19 +60,19 @@ namespace VanBeekRonny_TTI_GPR_d1._1_DM_Project_WPF
             FilmsBewerken nieuweFilm = new FilmsBewerken();
             nieuweFilm.Title = "Film - toevoegen";
             nieuweFilm.ShowDialog();
-            lbFilms.ItemsSource = DatabaseOperations.OphalenFilms();
+            dgFilms.ItemsSource = DatabaseOperations.OphalenFilms();
         }
 
         private void btnBijwerken_Click(object sender, RoutedEventArgs e)
         {
-            if (lbFilms.SelectedItem is Film film)
+            if (dgFilms.SelectedItem is Film film)
             {
                 FilmsBewerken filmsBewerken = new FilmsBewerken(film.id);
                 filmsBewerken.Title = $"Film '{filmsBewerken.txtTitel.Text}' - aanpassen";
                 filmsBewerken.txtTitel.IsEnabled = false;
                 filmsBewerken.ShowDialog();
-                lbFilms.SelectedIndex = -1;
-                lbFilms.ItemsSource = DatabaseOperations.OphalenFilms();
+                dgFilms.SelectedIndex = -1;
+                dgFilms.ItemsSource = DatabaseOperations.OphalenFilms();
                 FormulierResetten();
             }
             else
@@ -84,8 +84,8 @@ namespace VanBeekRonny_TTI_GPR_d1._1_DM_Project_WPF
         private void btnVerwijderen_Click(object sender, RoutedEventArgs e)
         {
             StringBuilder foutmeldingen = new StringBuilder();
-            foutmeldingen.Append(Valideer("lbFilms"));
-            Film film = lbFilms.SelectedItem as Film;
+            foutmeldingen.Append(Valideer("dgFilms"));
+            Film film = dgFilms.SelectedItem as Film;
 
             if (string.IsNullOrWhiteSpace(foutmeldingen.ToString()))
             {
@@ -94,7 +94,7 @@ namespace VanBeekRonny_TTI_GPR_d1._1_DM_Project_WPF
                     MessageBox.Show($"Code uitvoeren om de film {film.titel} te verwijderen.");
                     //if (DatabaseOperations.VerwijderenFilm(film)>0)
                     //{
-                    //    lbFilms.ItemsSource = DatabaseOperations.OphalenFilms();
+                    //    dgFilms.ItemsSource = DatabaseOperations.OphalenFilms();
                     //}
                     //else
                     //{
@@ -115,7 +115,7 @@ namespace VanBeekRonny_TTI_GPR_d1._1_DM_Project_WPF
 
         private string Valideer(string columnName)
         {
-            if (columnName == "lbFilms" && lbFilms.SelectedItem == null)
+            if (columnName == "dgFilms" && dgFilms.SelectedItem == null)
             {
                 return "Selecteer een film!" + Environment.NewLine;
             }
@@ -124,8 +124,8 @@ namespace VanBeekRonny_TTI_GPR_d1._1_DM_Project_WPF
 
         private void txtZoeken_KeyUp(object sender, KeyEventArgs e)
         {
-            lbFilms.ItemsSource = DatabaseOperations.ZoekenFilms(txtZoeken.Text);
-            lbFilms.Items.Refresh();
+            dgFilms.ItemsSource = DatabaseOperations.ZoekenFilms(txtZoeken.Text);
+            dgFilms.Items.Refresh();
         }
 
         private void FormulierResetten()
@@ -136,7 +136,8 @@ namespace VanBeekRonny_TTI_GPR_d1._1_DM_Project_WPF
             cmbTaal.SelectedIndex = -1;
             txtSlogan.Clear();
             cmbLeeftijdsgroep.SelectedIndex = -1;
-            txtVerhaallijn.Clear();            
+            txtVerhaallijn.Clear();
+            txtZoeken.Clear();
         }
 
         private void InvoerelementenReadOnly()

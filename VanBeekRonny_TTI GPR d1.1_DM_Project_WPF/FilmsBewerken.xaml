@@ -50,13 +50,13 @@
         <TextBox x:Name="txtVerhaallijn" Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="2" Margin="3" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" MaxLines="6"/>
         <Label x:Name="lblBeroemdheden" Content="Beroemdheden" Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2" Margin="3" FontWeight="Bold"/>
         <ComboBox x:Name="cmbBeroemdheden" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" Margin="3"/>
-        <Button x:Name="btnToevoegen" Content="Toevoegen" Grid.Row="2" Grid.Column="2" Margin="3" Click="btnToevoegen_Click"/>
+        <Button x:Name="btnToevoegen" Style="{StaticResource MaterialDesignRaisedLightButton}" Content="Toevoegen" Grid.Row="2" Grid.Column="2" Margin="3" Click="btnToevoegen_Click"/>
         <Button x:Name="btnVerwijderen" Content="Verwijderen" Grid.Row="2" Grid.Column="3" Margin="3" Click="btnVerwijderen_Click"/>
         <Label x:Name="lblCast" Content="Cast" Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2" Margin="3" FontWeight="Bold" HorizontalAlignment="Center"/>
         <ListBox x:Name="lbCast" Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" Grid.RowSpan="6" Margin="3"/>
         <Label x:Name="lblGenre" Content="Genres" Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="2" Margin="3" FontWeight="Bold"/>
         <ComboBox x:Name="cmbGenres" Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="2" Margin="3"/>
-        <Button x:Name="btnGenreToevoegen" Content="Toevoegen" Grid.Row="2" Grid.Column="4" Margin="3" Click="btnGenreToevoegen_Click"/>
+        <Button x:Name="btnGenreToevoegen" Style="{StaticResource MaterialDesignRaisedLightButton}" Content="Toevoegen" Grid.Row="2" Grid.Column="4" Margin="3" Click="btnGenreToevoegen_Click"/>
         <Button x:Name="btnGenreVerwijderen" Content="Verwijderen" Grid.Row="2" Grid.Column="5" Margin="3" Click="btnGenreVerwijderen_Click"/>
         <Label x:Name="lblGenres" Content="Genres" Grid.Row="3" Grid.Column="4" Grid.ColumnSpan="2" Margin="3" FontWeight="Bold" HorizontalAlignment="Center"/>
         <ListBox x:Name="lbGenres" Grid.Row="4" Grid.Column="4" Grid.ColumnSpan="2" Grid.RowSpan="6" Margin="3"/>

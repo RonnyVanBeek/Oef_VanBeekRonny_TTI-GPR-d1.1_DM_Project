@@ -32,7 +32,7 @@ namespace VanBeekRonny_TTI_GPR_d1._1_DM_Project_WPF
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            lbBeroemdheden.ItemsSource = DatabaseOperations.OphalenBeroemdheden();
+            dgBeroemdheden.ItemsSource = DatabaseOperations.OphalenBeroemdheden();
             cmbNationaliteit.ItemsSource = DatabaseOperations.Nationaliteiten();
             cmbSterrenbeeld.ItemsSource = DatabaseOperations.Sterrenbeelden();
             InvoerelementenReadOnly();
@@ -40,7 +40,7 @@ namespace VanBeekRonny_TTI_GPR_d1._1_DM_Project_WPF
 
         private void dataBeroemdheden_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (lbBeroemdheden.SelectedItem is Beroemdheid beroemdheid)
+            if (dgBeroemdheden.SelectedItem is Beroemdheid beroemdheid)
             {
                 txtVoornaam.Text = beroemdheid.voornaam;
                 txtAchternaam.Text = beroemdheid.naam;
@@ -54,15 +54,15 @@ namespace VanBeekRonny_TTI_GPR_d1._1_DM_Project_WPF
 
         private void btnBijwerken_Click(object sender, RoutedEventArgs e)
         {            
-            if (lbBeroemdheden.SelectedItem is Beroemdheid beroemdheid)
+            if (dgBeroemdheden.SelectedItem is Beroemdheid beroemdheid)
             {
                 BeroemdhedenBewerken beroemdhedenBewerken = new BeroemdhedenBewerken(beroemdheid.id);
                 beroemdhedenBewerken.Title = $"Beroemdheid '{beroemdheid.ToString()}' - aanpassen";
                 beroemdhedenBewerken.txtVoornaam.IsEnabled = false;
                 beroemdhedenBewerken.txtNaam.IsEnabled = false;
                 beroemdhedenBewerken.ShowDialog();
-                lbBeroemdheden.SelectedIndex = -1;
-                lbBeroemdheden.ItemsSource = DatabaseOperations.OphalenBeroemdheden();
+                dgBeroemdheden.SelectedIndex = -1;
+                dgBeroemdheden.ItemsSource = DatabaseOperations.OphalenBeroemdheden();
                 FormulierResetten();
             }
             else
@@ -78,15 +78,15 @@ namespace VanBeekRonny_TTI_GPR_d1._1_DM_Project_WPF
 
         private void txtZoeken_KeyUp(object sender, KeyEventArgs e)
         {
-            lbBeroemdheden.ItemsSource = DatabaseOperations.ZoekenBeroemdheden(txtZoeken.Text);
-            lbBeroemdheden.Items.Refresh();
+            dgBeroemdheden.ItemsSource = DatabaseOperations.ZoekenBeroemdheden(txtZoeken.Text);
+            dgBeroemdheden.Items.Refresh();
         }
 
         private void btnVerwijderen_Click(object sender, RoutedEventArgs e)
         {
             StringBuilder foutmeldingen = new StringBuilder();
-            foutmeldingen.Append(Valideer("lbBeroemdheden"));
-            Beroemdheid beroemdheid = lbBeroemdheden.SelectedItem as Beroemdheid;
+            foutmeldingen.Append(Valideer("dgBeroemdheden"));
+            Beroemdheid beroemdheid = dgBeroemdheden.SelectedItem as Beroemdheid;
 
             if (string.IsNullOrWhiteSpace(foutmeldingen.ToString()))
             {
@@ -95,7 +95,7 @@ namespace VanBeekRonny_TTI_GPR_d1._1_DM_Project_WPF
                     //MessageBox.Show($"Code uitvoeren om de film {beroemdheid.ToString()} te verwijderen.");
                     if (DatabaseOperations.VerwijderenBeroemdheid(beroemdheid) > 0)
                     {
-                        lbBeroemdheden.ItemsSource = DatabaseOperations.OphalenBeroemdheden();
+                        dgBeroemdheden.ItemsSource = DatabaseOperations.OphalenBeroemdheden();
                     }
                     else
                     {
@@ -116,7 +116,7 @@ namespace VanBeekRonny_TTI_GPR_d1._1_DM_Project_WPF
 
         private string Valideer(string columnName)
         {
-            if (columnName == "lbBeroemdheden" && lbBeroemdheden.SelectedItem == null)
+            if (columnName == "dgBeroemdheden" && dgBeroemdheden.SelectedItem == null)
             {
                 return "Selecteer een beroemdheid!" + Environment.NewLine;
             }
@@ -129,7 +129,7 @@ namespace VanBeekRonny_TTI_GPR_d1._1_DM_Project_WPF
             beroemdhedenBewerken.Title = $"Beroemdheid - toevoegen";
             beroemdhedenBewerken.txtNaam.Focus();
             beroemdhedenBewerken.ShowDialog();
-            lbBeroemdheden.ItemsSource = DatabaseOperations.OphalenBeroemdheden();
+            dgBeroemdheden.ItemsSource = DatabaseOperations.OphalenBeroemdheden();
             FormulierResetten();
         }
 
@@ -142,6 +142,7 @@ namespace VanBeekRonny_TTI_GPR_d1._1_DM_Project_WPF
             txtLengte.Clear();
             txtHandelsmerk.Clear();
             cmbSterrenbeeld.SelectedIndex = -1;
+            txtZoeken.Clear();
         }
 
         private void InvoerelementenReadOnly()
