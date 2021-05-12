@@ -22,7 +22,8 @@ namespace VanBeekRonny_TTI_GPR_d1._1_DM_Project_WPF
     public partial class FilmsBewerken : Window
     {
         //Globale variabele
-        int filmId = 0;
+        int filmId=0;
+        Film film = null;
         List<Beroemdheid> cast = new List<Beroemdheid>();
         List<Genre> genres = new List<Genre>();
 
@@ -35,11 +36,10 @@ namespace VanBeekRonny_TTI_GPR_d1._1_DM_Project_WPF
         public FilmsBewerken(int FilmId)
         {
             InitializeComponent();
-            Film film = DatabaseOperations.OphalenFilmsPerId(FilmId);
-            this.filmId = FilmId;
-
             if (FilmId > 0)
             {
+                film = DatabaseOperations.OphalenFilmsPerId(FilmId);
+                this.filmId = FilmId;
                 this.txtTitel.Text = film.titel;
                 this.dpPublicatiedatum.SelectedDate = film.publicatiedatum;
                 this.cmbTaal.SelectedItem = film.Taal;
@@ -47,9 +47,6 @@ namespace VanBeekRonny_TTI_GPR_d1._1_DM_Project_WPF
                 this.cmbLeeftijdsgroep.SelectedItem = film.Leeftijdsgroep;
                 this.txtSlogan.Text = film.slogan;
                 this.txtVerhaallijn.Text = film.verhaallijn;
-                this.lbCast.ItemsSource = film.FilmBeroemdheden;
-                this.lbGenres.ItemsSource = film.FilmGenres;
-                this.btnOpslaan.Content = "Bijwerken";
 
                 foreach (FilmBeroemdheid filmBeroemdheid in film.FilmBeroemdheden)
                 {
@@ -59,12 +56,16 @@ namespace VanBeekRonny_TTI_GPR_d1._1_DM_Project_WPF
                 foreach (FilmGenre filmGenre in film.FilmGenres)
                 {
                     genres.Add(filmGenre.Genre);
-                }                
+                }
+
+                this.lbCast.ItemsSource = cast;
+                this.lbGenres.ItemsSource = genres;
+                this.btnOpslaan.Content = "Bijwerken";
+
             }
             else
             {
-                Film nieuweFilm = new Film();
-                
+                film = new Film();                
             }
 
         }
@@ -165,8 +166,8 @@ namespace VanBeekRonny_TTI_GPR_d1._1_DM_Project_WPF
                 Taal taal = cmbTaal.SelectedItem as Taal;
                 Leeftijdsgroep leeftijdsgroep = cmbLeeftijdsgroep.SelectedItem as Leeftijdsgroep;
 
-                Film film = new Film();
-                film.id = filmId;
+                
+                //film.id = filmId;
                 film.titel = txtTitel.Text;
                 film.publicatiedatum = dpPublicatiedatum.SelectedDate.Value;
                 film.speelduur = txtSpeelduur.Text;
@@ -175,7 +176,7 @@ namespace VanBeekRonny_TTI_GPR_d1._1_DM_Project_WPF
                 film.slogan = txtSlogan.Text;
                 film.leeftijdsgroepId = leeftijdsgroep.id;
 
-                foreach (FilmBeroemdheid filmBeroemdheidDb in film.FilmBeroemdheden)
+                foreach (FilmBeroemdheid filmBeroemdheidDb in film.FilmBeroemdheden.ToList())
                 {
                     if (!cast.Contains(filmBeroemdheidDb.Beroemdheid))
                     {
@@ -203,7 +204,6 @@ namespace VanBeekRonny_TTI_GPR_d1._1_DM_Project_WPF
                     if (filmId > 0) //bewerken
                     {
                         actie = "Bijwerken";
-                        film.id = filmId;
                         resultaat = DatabaseOperations.FilmBijwerken(film); //Query film bijwerken wordt uitgevoerd, en geeft een resultaat terug.
                     }
                     else //nieuw

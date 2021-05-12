@@ -134,7 +134,6 @@ namespace VanBeekRonny_TTI_GPR_d1._1_DM_Project_DAL
                 {
                     entities.Film.Add(film);
                     return entities.SaveChanges();
-
                 }
             }
             catch (Exception ex)
@@ -150,9 +149,9 @@ namespace VanBeekRonny_TTI_GPR_d1._1_DM_Project_DAL
             {
                 using (IMDbFilmsEntities entities = new IMDbFilmsEntities())
                 {
+                    //entities.Film.Include(x => x.FilmBeroemdheden);                    
                     entities.Entry(film).State = EntityState.Modified;
                     return entities.SaveChanges();
-
                 }
             }
             catch (Exception ex)

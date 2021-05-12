@@ -35,13 +35,21 @@ namespace VanBeekRonny_TTI_GPR_d1._1_DM_Project_DAL
         {
             get
             {
-                if (columnName == nameof(naam) && string.IsNullOrWhiteSpace(naam))
+                if (columnName == nameof(naam) && (string.IsNullOrWhiteSpace(naam) || naam.Length > 22))
                 {
-                    return "Naam is een verplicht veld!";
+                    return "Naam is een verplicht veld, en moet kleiner zijn dan 22 tekens!";
                 }
-                if (columnName == nameof(voornaam) && string.IsNullOrWhiteSpace(voornaam))
+                if (columnName == nameof(voornaam) && (string.IsNullOrWhiteSpace(voornaam) || voornaam.Length > 22))
                 {
-                    return "Voornaam is een verplicht veld!";
+                    return "Voornaam is een verplicht veld, en moet kleiner zijn dan 22 tekens!";
+                }
+                if (columnName == nameof(lengte) && lengte < 0)
+                {
+                    return "Lengte moet groter zijn dan 0!";
+                }
+                if (columnName == nameof(handelsmerk) && handelsmerk.Length > 100)
+                {
+                    return "Handelsmerk moet kleiner zijn dan 100 tekens!";
                 }
                 return "";
             }
