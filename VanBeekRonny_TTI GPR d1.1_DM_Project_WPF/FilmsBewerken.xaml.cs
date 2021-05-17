@@ -92,6 +92,14 @@ namespace VanBeekRonny_TTI_GPR_d1._1_DM_Project_WPF
                 if (!cast.Contains(beroemdheid))
                 {
                     cast.Add(beroemdheid);
+                    if (filmId > 0)
+                    {
+                        FilmBeroemdheid fb = new FilmBeroemdheid();
+                        fb.filmId = filmId;
+                        fb.beroemdheidId = beroemdheid.id;
+                        fb.functie = "Acteur";
+                        DatabaseOperations.ToevoegenFilmBeroemdheid(fb);
+                    }
                     lbCast.Items.Refresh();
                     cmbBeroemdheden.SelectedIndex = -1;
                 }
@@ -112,6 +120,15 @@ namespace VanBeekRonny_TTI_GPR_d1._1_DM_Project_WPF
             if (lbCast.SelectedItem is Beroemdheid beroemdheid)
             {
                 cast.Remove(beroemdheid);
+                if (filmId > 0)
+                {
+                    List<FilmBeroemdheid> beroemdhedenFilm = DatabaseOperations.OphalenFilmBeroemdhedenPerFilm(filmId);
+                    FilmBeroemdheid fb = DatabaseOperations.OphalenFilmBeroemdheidFidBid(filmId, beroemdheid.id);
+                    if (beroemdhedenFilm.Contains(fb))
+                    {
+                        DatabaseOperations.VerwijderenFilmBeroemdheid(fb);
+                    }
+                }
                 lbCast.Items.Refresh();
             }
             else
@@ -127,6 +144,13 @@ namespace VanBeekRonny_TTI_GPR_d1._1_DM_Project_WPF
                 if (!genres.Contains(genre))
                 {
                     genres.Add(genre);
+                    if (filmId > 0)
+                    {
+                        FilmGenre filmGenre = new FilmGenre();
+                        filmGenre.filmId = filmId;
+                        filmGenre.genreId = genre.id;
+                        DatabaseOperations.ToevoegenFilmGenre(filmGenre);
+                    }
                     lbGenres.Items.Refresh();
                     cmbGenres.SelectedIndex = -1;
                 }
@@ -147,6 +171,15 @@ namespace VanBeekRonny_TTI_GPR_d1._1_DM_Project_WPF
             if (lbGenres.SelectedItem is Genre genre)
             {
                 genres.Remove(genre);
+                if (filmId > 0)
+                {
+                    List<FilmGenre> genresFilm = DatabaseOperations.OphalenFilmGenresPerFilm(filmId);
+                    FilmGenre fg = DatabaseOperations.OphalenFilmBeroemdheidFidGid(filmId, genre.id);
+                    if (genresFilm.Contains(fg))
+                    {
+                        DatabaseOperations.VerwijderenFilmGenre(fg);
+                    }
+                }
                 lbGenres.Items.Refresh();
             }
             else
@@ -177,26 +210,6 @@ namespace VanBeekRonny_TTI_GPR_d1._1_DM_Project_WPF
                 film.slogan = txtSlogan.Text;
                 film.leeftijdsgroepId = leeftijdsgroep.id;
                 film.Leeftijdsgroep = leeftijdsgroep;
-
-                foreach (FilmBeroemdheid filmBeroemdheidDb in film.FilmBeroemdheden.ToList())
-                {
-                    if (!cast.Contains(filmBeroemdheidDb.Beroemdheid))
-                    {
-                        film.FilmBeroemdheden.Remove(filmBeroemdheidDb);
-                    }
-                }
-
-                foreach (Beroemdheid beroemdheid in cast) //Test om beroemdheden aan de film toe te voegen
-                {
-                    FilmBeroemdheid filmBeroemdheid = new FilmBeroemdheid();
-                    filmBeroemdheid.filmId = filmId;
-                    filmBeroemdheid.beroemdheidId = beroemdheid.id;
-                    filmBeroemdheid.functie = "Acteur";
-                    if (!film.FilmBeroemdheden.Contains(filmBeroemdheid))
-                    {
-                        film.FilmBeroemdheden.Add(filmBeroemdheid);
-                    }
-                }
 
                 if (film.IsGeldig()) //Controle of de velden die ingevuld moeten zijn, ook ingevuld zijn.
                 {

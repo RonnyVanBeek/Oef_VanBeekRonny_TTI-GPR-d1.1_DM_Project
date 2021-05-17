@@ -238,5 +238,115 @@ namespace VanBeekRonny_TTI_GPR_d1._1_DM_Project_DAL
                 return 0;
             }
         }
+
+        public static int ToevoegenFilmBeroemdheid(FilmBeroemdheid filmBeroemdheid) //17/05/2021
+        {
+            try
+            {
+                using (IMDbFilmsEntities entities = new IMDbFilmsEntities())
+                {
+
+                    entities.FilmBeroemdheid.Add(filmBeroemdheid);
+                    return entities.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                FileOperations.FoutLoggen(ex);
+                return 0;
+            }
+        }
+
+        public static int ToevoegenFilmGenre(FilmGenre filmGenre) //17/05/2021
+        {
+            try
+            {
+                using (IMDbFilmsEntities entities = new IMDbFilmsEntities())
+                {
+
+                    entities.FilmGenre.Add(filmGenre);
+                    return entities.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                FileOperations.FoutLoggen(ex);
+                return 0;
+            }
+        }
+
+        public static FilmBeroemdheid OphalenFilmBeroemdheidFidBid(int FilmId, int BeroemdheidId) //17/05/2021
+        {
+            using (IMDbFilmsEntities entities = new IMDbFilmsEntities())
+            {
+                var query = entities.FilmBeroemdheid
+                    .Where(x => x.filmId.Equals(FilmId) && x.beroemdheidId.Equals(BeroemdheidId));
+                return query.SingleOrDefault();
+            }
+        }
+
+        public static FilmGenre OphalenFilmBeroemdheidFidGid(int FilmId, int GenreId) //17/05/2021
+        {
+            using (IMDbFilmsEntities entities = new IMDbFilmsEntities())
+            {
+                var query = entities.FilmGenre
+                    .Where(x => x.filmId.Equals(FilmId) && x.genreId.Equals(GenreId));
+                return query.SingleOrDefault();
+            }
+        }
+
+        public static List<FilmBeroemdheid> OphalenFilmBeroemdhedenPerFilm(int FilmId) //17/05/2021
+        {
+            using (IMDbFilmsEntities entities = new IMDbFilmsEntities())
+            {
+                var query = entities.FilmBeroemdheid
+                    .Where(x => x.filmId.Equals(FilmId));
+                return query.ToList();
+            }
+        }
+
+        public static List<FilmGenre> OphalenFilmGenresPerFilm(int FilmId) //17/05/2021
+        {
+            using (IMDbFilmsEntities entities = new IMDbFilmsEntities())
+            {
+                var query = entities.FilmGenre
+                    .Where(x => x.filmId.Equals(FilmId));
+                return query.ToList();
+            }
+        }
+
+        public static int VerwijderenFilmBeroemdheid(FilmBeroemdheid filmBeroemdheid) //17/05/2021
+        {
+            try
+            {
+                using (IMDbFilmsEntities entities = new IMDbFilmsEntities())
+                {
+                    entities.Entry(filmBeroemdheid).State = EntityState.Deleted;
+                    return entities.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                FileOperations.FoutLoggen(ex);
+                return 0;
+            }
+        }
+
+        public static int VerwijderenFilmGenre(FilmGenre filmGenre) //17/05/2021
+        {
+            try
+            {
+                using (IMDbFilmsEntities entities = new IMDbFilmsEntities())
+                {
+                    entities.Entry(filmGenre).State = EntityState.Deleted;
+                    return entities.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                FileOperations.FoutLoggen(ex);
+                return 0;
+            }
+        }
     }
 }
