@@ -173,8 +173,10 @@ namespace VanBeekRonny_TTI_GPR_d1._1_DM_Project_WPF
                 film.speelduur = txtSpeelduur.Text;
                 film.verhaallijn = txtVerhaallijn.Text;
                 film.taalId = taal.id;
+                film.Taal = taal;
                 film.slogan = txtSlogan.Text;
                 film.leeftijdsgroepId = leeftijdsgroep.id;
+                film.Leeftijdsgroep = leeftijdsgroep;
 
                 foreach (FilmBeroemdheid filmBeroemdheidDb in film.FilmBeroemdheden.ToList())
                 {
