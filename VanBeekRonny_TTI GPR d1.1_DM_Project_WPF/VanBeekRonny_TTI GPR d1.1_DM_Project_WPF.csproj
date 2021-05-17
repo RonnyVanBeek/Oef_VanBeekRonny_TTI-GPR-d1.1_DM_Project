@@ -37,6 +37,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>IMDb.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
@@ -75,11 +78,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="BeroemdhedenBewerken.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Films.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="FilmsNieuw.xaml">
+    <Page Include="FilmsBewerken.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -94,11 +101,14 @@
     <Compile Include="Beroemdheden.xaml.cs">
       <DependentUpon>Beroemdheden.xaml</DependentUpon>
     </Compile>
+    <Compile Include="BeroemdhedenBewerken.xaml.cs">
+      <DependentUpon>BeroemdhedenBewerken.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Films.xaml.cs">
       <DependentUpon>Films.xaml</DependentUpon>
     </Compile>
-    <Compile Include="FilmsNieuw.xaml.cs">
-      <DependentUpon>FilmsNieuw.xaml</DependentUpon>
+    <Compile Include="FilmsBewerken.xaml.cs">
+      <DependentUpon>FilmsBewerken.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -140,6 +150,13 @@
       <Project>{b9972d85-841d-4223-9f33-ef31637cc808}</Project>
       <Name>VanBeekRonny_TTI GPR d1.1_DM_Project_DAL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\VanBeekRonny_TTI GPR d1.1_DM_Project_Models\VanBeekRonny_TTI GPR d1.1_DM_Project_Models.csproj">
+      <Project>{4a433483-e565-4c25-9b18-c94f7811ad4d}</Project>
+      <Name>VanBeekRonny_TTI GPR d1.1_DM_Project_Models</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="IMDb.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.4.0.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.4.0.0\build\MaterialDesignThemes.targets')" />

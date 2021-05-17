@@ -15,8 +15,23 @@ namespace VanBeekRonny_TTI_GPR_d1._1_DM_Project_DAL
             {
                 var query = entities.Film
                     .Include(x => x.Taal)
-                    .Include(x => x.Leeftijdsgroep);
+                    .Include(x => x.Leeftijdsgroep)
+                    .Include(x => x.FilmBeroemdheden);
                 return query.ToList();
+            }
+        }
+
+        public static Film OphalenFilmsPerId(int FilmId) //3/05/2021
+        {
+            using (IMDbFilmsEntities entities = new IMDbFilmsEntities())
+            {
+                var query = entities.Film
+                    .Include(x => x.Taal)
+                    .Include(x => x.Leeftijdsgroep)
+                    .Include(x => x.FilmGenres.Select(y => y.Genre))
+                    .Include(x => x.FilmBeroemdheden.Select(y => y.Beroemdheid))
+                    .Where(x => x.id.Equals(FilmId));
+                return query.SingleOrDefault();
             }
         }
 
@@ -26,8 +41,20 @@ namespace VanBeekRonny_TTI_GPR_d1._1_DM_Project_DAL
             {
                 var query = entities.Beroemdheid
                     .Include(x => x.Nationaliteit)
+                    .Include(x => x.Sterrenbeeld)
                     .OrderBy(x => x.naam)
                     .ThenBy(x => x.voornaam);
+                return query.ToList();
+            }
+        }
+
+        public static List<Genre> OphalenGenres()
+        {
+            using (IMDbFilmsEntities entities = new IMDbFilmsEntities())
+            {
+                var query = entities.Genre
+                    .Include(x => x.FilmGenres)
+                    .OrderBy(x => x.genre);
                 return query.ToList();
             }
         }
@@ -65,6 +92,150 @@ namespace VanBeekRonny_TTI_GPR_d1._1_DM_Project_DAL
             {
                 var query = entities.Sterrenbeeld;
                 return query.ToList();
+            }
+        }
+
+        public static int VerwijderenFilm(Film film) //3/05/2021
+        {
+            try
+            {
+                using (IMDbFilmsEntities entities = new IMDbFilmsEntities())
+                {
+
+                    entities.Entry(film).State = EntityState.Deleted;
+                    return entities.SaveChanges();
+
+                }
+            }
+            catch (Exception ex)
+            {
+                FileOperations.FoutLoggen(ex);
+                return 0;
+            }
+        }
+
+        public static List<Film> ZoekenFilms(string zoekwaarde) //3/05/2021
+        {
+            using (IMDbFilmsEntities entities = new IMDbFilmsEntities())
+            {
+                var query = entities.Film
+                    .Include(x => x.Taal)
+                    .Include(x => x.Leeftijdsgroep)
+                    .Where(x => x.titel.Contains(zoekwaarde));
+                return query.ToList();
+            }
+        }
+
+        public static int FilmToevoegen(Film film) //4/05/2021
+        {
+            try
+            {
+                using (IMDbFilmsEntities entities = new IMDbFilmsEntities())
+                {
+                    entities.Film.Add(film);
+                    return entities.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                FileOperations.FoutLoggen(ex);
+                return 0;
+            }
+        }
+
+        public static int FilmBijwerken(Film film) //4/05/2021
+        {
+            try
+            {
+                using (IMDbFilmsEntities entities = new IMDbFilmsEntities())
+                {
+                    //entities.Film.Include(x => x.FilmBeroemdheden);                    
+                    entities.Entry(film).State = EntityState.Modified;
+                    return entities.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                FileOperations.FoutLoggen(ex);
+                return 0;
+            }
+        }
+
+        public static Beroemdheid OphalenBeroemdheidPerId(int BeroemdheidId) //4/05/2021
+        {
+            using (IMDbFilmsEntities entities = new IMDbFilmsEntities())
+            {
+                var query = entities.Beroemdheid
+                    .Include(x => x.Nationaliteit)
+                    .Include(x => x.Sterrenbeeld)
+                    .Where(x => x.id.Equals(BeroemdheidId));
+                return query.SingleOrDefault();
+            }
+        }
+        public static List<Beroemdheid> ZoekenBeroemdheden(string zoekwaarde) //4/05/2021
+        {
+            using (IMDbFilmsEntities entities = new IMDbFilmsEntities())
+            {
+                var query = entities.Beroemdheid
+                    .Include(x => x.Nationaliteit)
+                    .Include(x => x.Sterrenbeeld)
+                    .Where(x => x.naam.Contains(zoekwaarde) || x.voornaam.Contains(zoekwaarde));
+                return query.ToList();
+            }
+        }
+
+        public static int BeroemdheidToevoegen(Beroemdheid beroemdheid) //5/05/2021
+        {
+            try
+            {
+                using (IMDbFilmsEntities entities = new IMDbFilmsEntities())
+                {
+                    entities.Beroemdheid.Add(beroemdheid);
+                    return entities.SaveChanges();
+
+                }
+            }
+            catch (Exception ex)
+            {
+                FileOperations.FoutLoggen(ex);
+                return 0;
+            }
+        }
+
+        public static int BeroemdheidBijwerken(Beroemdheid beroemdheid) //5/05/2021
+        {
+            try
+            {
+                using (IMDbFilmsEntities entities = new IMDbFilmsEntities())
+                {
+                    entities.Entry(beroemdheid).State = EntityState.Modified;
+                    return entities.SaveChanges();
+
+                }
+            }
+            catch (Exception ex)
+            {
+                FileOperations.FoutLoggen(ex);
+                return 0;
+            }
+        }
+
+        public static int VerwijderenBeroemdheid(Beroemdheid beroemdheid) //5/05/2021
+        {
+            try
+            {
+                using (IMDbFilmsEntities entities = new IMDbFilmsEntities())
+                {
+
+                    entities.Entry(beroemdheid).State = EntityState.Deleted;
+                    return entities.SaveChanges();
+
+                }
+            }
+            catch (Exception ex)
+            {
+                FileOperations.FoutLoggen(ex);
+                return 0;
             }
         }
     }

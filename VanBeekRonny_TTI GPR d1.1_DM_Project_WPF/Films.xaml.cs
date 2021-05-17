@@ -23,13 +23,15 @@ namespace VanBeekRonny_TTI_GPR_d1._1_DM_Project_WPF
         public Films()
         {
             InitializeComponent();
+            FormulierResetten();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            dataFilms.ItemsSource = DatabaseOperations.OphalenFilms();
+            dgFilms.ItemsSource = DatabaseOperations.OphalenFilms();
             cmbTaal.ItemsSource = DatabaseOperations.Talen();
             cmbLeeftijdsgroep.ItemsSource = DatabaseOperations.Leeftijdsgroepen();
+            InvoerelementenReadOnly();
         }
 
         private void btnSluiten_Click(object sender, RoutedEventArgs e)
@@ -39,7 +41,7 @@ namespace VanBeekRonny_TTI_GPR_d1._1_DM_Project_WPF
 
         private void dataFilms_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (dataFilms.SelectedItem is Film film)
+            if (dgFilms.SelectedItem is Film film)
             {
                 txtTitel.Text = film.titel;
                 dpPublicatiedatum.SelectedDate = film.publicatiedatum;
@@ -53,9 +55,100 @@ namespace VanBeekRonny_TTI_GPR_d1._1_DM_Project_WPF
 
         private void btnNieuw_Click(object sender, RoutedEventArgs e)
         {
-            FilmsNieuw filmsNieuw = new FilmsNieuw();
-            filmsNieuw.ShowDialog();
+            //FilmsNieuw filmsNieuw = new FilmsNieuw();
+            //filmsNieuw.ShowDialog();
+            FilmsBewerken nieuweFilm = new FilmsBewerken();
+            nieuweFilm.Title = "Film - toevoegen";
+            nieuweFilm.ShowDialog();
+            dgFilms.ItemsSource = DatabaseOperations.OphalenFilms();
         }
 
+        private void btnBijwerken_Click(object sender, RoutedEventArgs e)
+        {
+            if (dgFilms.SelectedItem is Film film)
+            {
+                FilmsBewerken filmsBewerken = new FilmsBewerken(film.id);
+                filmsBewerken.Title = $"Film '{filmsBewerken.txtTitel.Text}' - aanpassen";
+                filmsBewerken.txtTitel.IsEnabled = false;
+                filmsBewerken.ShowDialog();
+                dgFilms.SelectedIndex = -1;
+                dgFilms.ItemsSource = DatabaseOperations.OphalenFilms();
+                FormulierResetten();
+            }
+            else
+            {
+                MessageBox.Show("Er is geen film geselecteerd om te bewerken!");
+            }
+        }
+
+        private void btnVerwijderen_Click(object sender, RoutedEventArgs e)
+        {
+            StringBuilder foutmeldingen = new StringBuilder();
+            foutmeldingen.Append(Valideer("dgFilms"));
+            Film film = dgFilms.SelectedItem as Film;
+
+            if (string.IsNullOrWhiteSpace(foutmeldingen.ToString()))
+            {
+                if (MessageBox.Show($"Weet u zeker dat u '{film.titel}' wilt verwijderen?","Bevestiging",MessageBoxButton.YesNo,MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                {
+                    MessageBox.Show($"Code uitvoeren om de film {film.titel} te verwijderen.");
+                    //if (DatabaseOperations.VerwijderenFilm(film)>0)
+                    //{
+                    //    dgFilms.ItemsSource = DatabaseOperations.OphalenFilms();
+                    //}
+                    //else
+                    //{
+                    //    MessageBox.Show($"Film: {film} is niet verwijderd.");
+                    //}
+                    FormulierResetten();
+                }
+                else
+                {
+                    MessageBox.Show($"'{film.titel}' is niet verwijderd? Handeling is geannuleerd.","Verwijderen geannuleerd");
+                }
+            }
+            else
+            {
+                MessageBox.Show(foutmeldingen.ToString(),"Verwijderen",MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+        }
+
+        private string Valideer(string columnName)
+        {
+            if (columnName == "dgFilms" && dgFilms.SelectedItem == null)
+            {
+                return "Selecteer een film!" + Environment.NewLine;
+            }
+            return "";
+        }
+
+        private void txtZoeken_KeyUp(object sender, KeyEventArgs e)
+        {
+            dgFilms.ItemsSource = DatabaseOperations.ZoekenFilms(txtZoeken.Text);
+            dgFilms.Items.Refresh();
+        }
+
+        private void FormulierResetten()
+        {
+            txtTitel.Clear();
+            dpPublicatiedatum.SelectedDate = null;
+            txtSpeelduur.Clear();
+            cmbTaal.SelectedIndex = -1;
+            txtSlogan.Clear();
+            cmbLeeftijdsgroep.SelectedIndex = -1;
+            txtVerhaallijn.Clear();
+            txtZoeken.Clear();
+        }
+
+        private void InvoerelementenReadOnly()
+        {
+            txtTitel.IsReadOnly = true;
+            dpPublicatiedatum.IsEnabled = false;
+            txtSpeelduur.IsReadOnly = true;
+            cmbTaal.IsReadOnly = true;
+            txtSlogan.IsReadOnly = true;
+            cmbLeeftijdsgroep.IsReadOnly = true;
+            txtVerhaallijn.IsReadOnly = true;
+        }
     }
 }

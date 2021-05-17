@@ -25,14 +25,14 @@ namespace VanBeekRonny_TTI_GPR_d1._1_DM_Project_DAL
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Beroemdheid> Beroemdheid { get; set; }
         public virtual DbSet<Film> Film { get; set; }
         public virtual DbSet<FilmBeroemdheid> FilmBeroemdheid { get; set; }
         public virtual DbSet<FilmGenre> FilmGenre { get; set; }
         public virtual DbSet<Genre> Genre { get; set; }
         public virtual DbSet<Leeftijdsgroep> Leeftijdsgroep { get; set; }
+        public virtual DbSet<Taal> Taal { get; set; }
+        public virtual DbSet<Beroemdheid> Beroemdheid { get; set; }
         public virtual DbSet<Nationaliteit> Nationaliteit { get; set; }
         public virtual DbSet<Sterrenbeeld> Sterrenbeeld { get; set; }
-        public virtual DbSet<Taal> Taal { get; set; }
     }
 }
