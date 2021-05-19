@@ -44,7 +44,7 @@ namespace VanBeekRonny_TTI_GPR_d1._1_DM_Project_WPF
 
         private void KnoppenIngeschakeld(bool status)
         {
-            btnGenres.IsEnabled = !status;
+            btnGenres.IsEnabled = status;
             btnTalen.IsEnabled = status;
             btnLeeftijdsgroepen.IsEnabled = status;
             btnNationaliteiten.IsEnabled = status;
