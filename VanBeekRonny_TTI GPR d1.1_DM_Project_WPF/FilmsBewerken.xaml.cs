@@ -30,6 +30,7 @@ namespace VanBeekRonny_TTI_GPR_d1._1_DM_Project_WPF
         public FilmsBewerken()
         {
             InitializeComponent();
+            film = new Film();
             this.btnOpslaan.Content = "Toevoegen";
         }
 
@@ -205,11 +206,15 @@ namespace VanBeekRonny_TTI_GPR_d1._1_DM_Project_WPF
                 film.publicatiedatum = dpPublicatiedatum.SelectedDate.Value;
                 film.speelduur = txtSpeelduur.Text;
                 film.verhaallijn = txtVerhaallijn.Text;
-                film.taalId = taal.id;
-                film.Taal = taal;
+                film.taalId = taal.id;                
                 film.slogan = txtSlogan.Text;
                 film.leeftijdsgroepId = leeftijdsgroep.id;
-                film.Leeftijdsgroep = leeftijdsgroep;
+                
+                if (filmId > 0)
+                {
+                    film.Taal = taal;
+                    film.Leeftijdsgroep = leeftijdsgroep;
+                }
 
                 if (film.IsGeldig()) //Controle of de velden die ingevuld moeten zijn, ook ingevuld zijn.
                 {

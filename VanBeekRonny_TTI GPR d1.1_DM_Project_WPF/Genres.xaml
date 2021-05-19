@@ -1,0 +1,41 @@
+﻿<Window x:Class="VanBeekRonny_TTI_GPR_d1._1_DM_Project_WPF.Genres"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VanBeekRonny_TTI_GPR_d1._1_DM_Project_WPF"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal" 
+        TextOptions.TextRenderingMode="Auto"        
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        Title="Genres" Height="600" Width="400" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>        
+        <DataGrid x:Name="dgGenre" Grid.Row="0" Grid.Column="0" Margin="3" AutoGenerateColumns="False" IsReadOnly="True" SelectionChanged="dgGenre_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding genre}" Header="Genre"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <TextBox x:Name="txtGenre" materialDesign:HintAssist.Hint="Genre naam" Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                 VerticalAlignment="Center" Grid.Row="1" Grid.Column="0" Margin="3"/>
+        <Button x:Name="btnToevoegen" Style="{StaticResource MaterialDesignRaisedLightButton}" Content="Toevoegen" Grid.Row="2" Grid.Column="0" Margin="3" Click="btnToevoegen_Click"/>
+        <Button x:Name="btnBijwerken" Style="{StaticResource MaterialDesignRaisedButton}" Content="Bijwerken" Grid.Row="3" Grid.Column="0" Margin="3" Click="btnBijwerken_Click"/>
+        <Button x:Name="btnVerwijderen" Content="Verwijderen" Style="{StaticResource MaterialDesignRaisedDarkButton}" Grid.Row="4" Grid.Column="0" Margin="3" Click="btnVerwijderen_Click"/>
+        <Button x:Name="btnSluiten" Style="{StaticResource MaterialDesignOutlinedButton}" Content="Sluiten" Grid.Row="5" Grid.Column="0" Margin="3" Click="btnSluiten_Click"/>
+    </Grid>
+</Window>

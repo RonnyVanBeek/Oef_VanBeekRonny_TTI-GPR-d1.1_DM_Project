@@ -348,5 +348,67 @@ namespace VanBeekRonny_TTI_GPR_d1._1_DM_Project_DAL
                 return 0;
             }
         }
+
+        public static int ToevoegenGenre(Genre genre) //17/05/2021
+        {
+            try
+            {
+                using (IMDbFilmsEntities entities = new IMDbFilmsEntities())
+                {
+
+                    entities.Genre.Add(genre);
+                    return entities.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                FileOperations.FoutLoggen(ex);
+                return 0;
+            }
+        }
+
+        public static int BijwerkenGenre(Genre genre) //17/05/2021
+        {
+            try
+            {
+                using (IMDbFilmsEntities entities = new IMDbFilmsEntities())
+                {
+                    entities.Entry(genre).State = EntityState.Modified;
+                    return entities.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                FileOperations.FoutLoggen(ex);
+                return 0;
+            }
+        }
+
+        public static int VerwijderenGenre(Genre genre) //17/05/2021
+        {
+            try
+            {
+                using (IMDbFilmsEntities entities = new IMDbFilmsEntities())
+                {
+                    entities.Entry(genre).State = EntityState.Deleted;
+                    return entities.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                FileOperations.FoutLoggen(ex);
+                return 0;
+            }
+        }
+
+        public static Genre OphalenGeselecteerdGenre(int genreId) //18/05/2021
+        {
+            using (IMDbFilmsEntities entities = new IMDbFilmsEntities())
+            {
+                var query = entities.Genre
+                    .Where(x => x.id.Equals(genreId));
+                return query.SingleOrDefault();
+            }
+        }
     }
 }

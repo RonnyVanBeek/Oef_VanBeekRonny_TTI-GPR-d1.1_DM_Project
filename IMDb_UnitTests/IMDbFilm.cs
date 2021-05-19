@@ -12,7 +12,7 @@ namespace IMDb_UnitTests
         public void Titel_OphalenNaamViaId_NaamEqualsValue()
         {
             //Arrange >> initialiseren van object
-            Film film = DatabaseOperations.OphalenFilmsPerId(1002);
+            Film film = DatabaseOperations.OphalenFilmsPerId(1002); //Film met id 1002 is Inception
 
             //Act >> het oproepen van de methode dat getest moet worden
             string filmtitel = "Inception";
