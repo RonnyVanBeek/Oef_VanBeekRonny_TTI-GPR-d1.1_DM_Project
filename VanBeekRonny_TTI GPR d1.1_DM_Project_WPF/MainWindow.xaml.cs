@@ -55,5 +55,11 @@ namespace VanBeekRonny_TTI_GPR_d1._1_DM_Project_WPF
         {
             KnoppenIngeschakeld(false);
         }
+
+        private void btnGenres_Click(object sender, RoutedEventArgs e)
+        {
+            Genres genres = new Genres();
+            genres.ShowDialog();
+        }
     }
 }

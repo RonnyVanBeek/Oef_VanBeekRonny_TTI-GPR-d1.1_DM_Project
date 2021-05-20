@@ -91,15 +91,15 @@ namespace VanBeekRonny_TTI_GPR_d1._1_DM_Project_WPF
             {
                 if (MessageBox.Show($"Weet u zeker dat u '{film.titel}' wilt verwijderen?","Bevestiging",MessageBoxButton.YesNo,MessageBoxImage.Warning) == MessageBoxResult.Yes)
                 {
-                    MessageBox.Show($"Code uitvoeren om de film {film.titel} te verwijderen.");
-                    //if (DatabaseOperations.VerwijderenFilm(film)>0)
-                    //{
-                    //    dgFilms.ItemsSource = DatabaseOperations.OphalenFilms();
-                    //}
-                    //else
-                    //{
-                    //    MessageBox.Show($"Film: {film} is niet verwijderd.");
-                    //}
+                    //MessageBox.Show($"Code uitvoeren om de film {film.titel} te verwijderen.");
+                    if (DatabaseOperations.VerwijderenFilm(film) > 0)
+                    {
+                        dgFilms.ItemsSource = DatabaseOperations.OphalenFilms();
+                    }
+                    else
+                    {
+                        MessageBox.Show($"Film: {film} is niet verwijderd.");
+                    }
                     FormulierResetten();
                 }
                 else
